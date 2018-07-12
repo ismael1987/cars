@@ -3,8 +3,10 @@ package com.cars.demo.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="color")
 public class Color {
 
     @Id
@@ -19,6 +21,10 @@ public class Color {
 
     public Color(Long id, String description) {
         this.id = id;
+        this.description = description;
+    }
+
+    public Color(String description) {
         this.description = description;
     }
 
