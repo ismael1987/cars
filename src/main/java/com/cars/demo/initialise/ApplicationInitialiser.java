@@ -14,11 +14,9 @@ import java.util.stream.Collectors;
 @Configuration
 public class ApplicationInitialiser {
 
-    @Autowired
-    ColorRepository colorRepository;
 
     @Bean
-    ApplicationRunner  intialiseData(){
+    ApplicationRunner  intialiseData(ColorRepository colorRepository){
         return  args -> {
             colorRepository.deleteAll();
             String theColors = "Black,Whait,Red";
