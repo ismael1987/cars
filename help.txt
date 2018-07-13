@@ -1,0 +1,16 @@
+this text description
+how you Each commit must have an associated Issue on Github.
+at the beginig 
+should install nodeJs from offical site  https://nodejs.org/en/
+Recomended 8.11.3
+after intstall it 
+run this command in the directory your project 
+npm install husky --save-dev
+you will find this file package.json
+you should add this lines 
+  "config": {
+    "commit-message-validator": {
+      "pattern": "\\#\\d+\\:\\s",
+      "errorMessage": "Commit message in wrong format: Must be '#[issuenr]: [message]', e.g. '#123: added value property'"
+    }
+  }
