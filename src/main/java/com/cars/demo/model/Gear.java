@@ -10,6 +10,7 @@ public class Gear {
     @Id
     @GeneratedValue
     private Long id;
+
     private String geartype;
 
     public Gear() {
