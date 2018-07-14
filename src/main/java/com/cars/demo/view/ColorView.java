@@ -38,8 +38,9 @@ public class ColorView {
 
     @PostMapping("/color")
     String addColor(@Valid  String color){
-        System.out.printf(color);
-        return "redirect:index";
+        Color newcolor = new Color(color);
+        colorRepository.save(newcolor);
+        return "index";
     }
 
 

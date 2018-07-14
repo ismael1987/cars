@@ -20,10 +20,10 @@ public class ApplicationInitialiser {
     @Bean
     ApplicationRunner  intialiseData(ColorRepository colorRepository, GearRepository gearRepository){
         return  args -> {
-            colorRepository.deleteAll();
-            String theColors = "Black,Whait,Red";
+          //  colorRepository.deleteAll();
+           // String theColors = "Black,Whait,Red";
 
-            Arrays.stream(theColors.split(",")).collect(Collectors.toList()).stream().map(e-> new Color(e)).forEach(color->colorRepository.save(color));
+            //Arrays.stream(theColors.split(",")).collect(Collectors.toList()).stream().map(e-> new Color(e)).forEach(color->colorRepository.save(color));
 
             colorRepository.findAll().stream().forEach(color -> color.toString());
 
