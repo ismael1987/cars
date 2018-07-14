@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class CarView {
+public class ColorView {
 
     @Autowired
     ColorRepository colorRepository;
