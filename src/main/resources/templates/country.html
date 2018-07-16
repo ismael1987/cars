@@ -12,8 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
-    <title>fuel</title>
+    <title>country</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-light bg-light border">
@@ -42,7 +41,7 @@
     <form action="/color" method="post">
 
         <div class="form-group">
-            <input class="form-control" name="fuel" placeholder="fuel"  type="text"/>
+            <input class="form-control" name="color" placeholder="color"  type="text"/>
         </div>
         <button class="btn btn-primary" type="submit">Add</button>
     </form>
@@ -50,10 +49,10 @@
     <br>
     <table class="table table-striped" style="width:100%">
         <tr>
-            <th>Fuel Type</th>
+            <th>Color Name</th>
         </tr>
-        <tr th:each="fuel : ${fuels}">
-            <td th:text="${fuel.fueltype}"></td>
+        <tr th:each="country : ${countries}">
+            <td th:text="${country.countryName}"></td>
         </tr>
     </table>
 

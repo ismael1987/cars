@@ -10,14 +10,14 @@ public class Country {
     @Id
     @GeneratedValue
     private Long id;
-    private String country;
+    private String countryName;
 
     public Country() {
     }
 
-    public Country(Long id, String country) {
+    public Country(Long id, String countryName) {
         this.id = id;
-        this.country = country;
+        this.countryName = countryName;
     }
 
     public Long getId() {
@@ -28,19 +28,19 @@ public class Country {
         this.id = id;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 
     @Override
     public String toString() {
         return "Country{" +
                 "id=" + id +
-                ", country='" + country + '\'' +
+                ", countryName='" + countryName + '\'' +
                 '}';
     }
 }
