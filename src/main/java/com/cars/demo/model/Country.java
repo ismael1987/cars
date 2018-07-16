@@ -3,6 +3,7 @@ package com.cars.demo.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.Valid;
 
 @Entity
 public class Country {
@@ -12,7 +13,7 @@ public class Country {
     private Long id;
     private String countryName;
 
-    public Country() {
+    public Country(@Valid String country) {
     }
 
     public Country(Long id, String countryName) {
