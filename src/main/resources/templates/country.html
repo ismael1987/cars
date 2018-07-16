@@ -38,10 +38,10 @@
 </nav>
 <main class="container p-5">
 
-    <form action="/color" method="post">
+    <form action="/country" method="post">
 
         <div class="form-group">
-            <input class="form-control" name="color" placeholder="color"  type="text"/>
+            <input class="form-control" name="country" placeholder="country"  type="text"/>
         </div>
         <button class="btn btn-primary" type="submit">Add</button>
     </form>
@@ -49,7 +49,7 @@
     <br>
     <table class="table table-striped" style="width:100%">
         <tr>
-            <th>Color Name</th>
+            <th>Country Name</th>
         </tr>
         <tr th:each="country : ${countries}">
             <td th:text="${country.countryName}"></td>
