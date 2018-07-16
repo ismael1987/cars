@@ -3,20 +3,18 @@ package com.cars.demo.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.Valid;
 
 @Entity
 public class Country {
-
     @Id
     @GeneratedValue
     private Long id;
     private String countryName;
 
-    public Country(@Valid String country) {
+    public Country() {
     }
 
-    public Country(Long id, String countryName) {
+    public Country(String countryName) {
         this.id = id;
         this.countryName = countryName;
     }

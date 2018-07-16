@@ -26,6 +26,7 @@ public class CountryView {
 
     @PostMapping("/country")
     public String addcountry(@Valid String country){
+
         Country newcountry = new Country(country);
         countryRepository.save(newcountry);
         return "index";

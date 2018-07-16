@@ -14,7 +14,7 @@ public class Fuel {
     public Fuel() {
     }
 
-    public Fuel(Long id, String fueltype) {
+    public Fuel(String fueltype) {
         this.id = id;
         this.fueltype = fueltype;
     }

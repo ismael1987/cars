@@ -1,8 +1,10 @@
 package com.cars.demo.initialise;
 
 import com.cars.demo.model.Color;
+import com.cars.demo.model.Country;
 import com.cars.demo.model.Gear;
 import com.cars.demo.repository.ColorRepository;
+import com.cars.demo.repository.CountryRepository;
 import com.cars.demo.repository.GearRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
