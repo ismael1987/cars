@@ -14,9 +14,9 @@ public class Fuel {
     public Fuel() {
     }
 
-    public Fuel(Long id, String feultype) {
+    public Fuel(Long id, String fueltype) {
         this.id = id;
-        this.fueltype = feultype;
+        this.fueltype = fueltype;
     }
 
     public Long getId() {
@@ -27,19 +27,19 @@ public class Fuel {
         this.id = id;
     }
 
-    public String getFeultype() {
+    public String getFueltype() {
         return fueltype;
     }
 
-    public void setFeultype(String feultype) {
-        this.fueltype = feultype;
+    public void setFueltype(String fueltype) {
+        this.fueltype = fueltype;
     }
 
     @Override
     public String toString() {
         return "Fuel{" +
                 "id=" + id +
-                ", feultype='" + fueltype + '\'' +
+                ", fueltype='" + fueltype + '\'' +
                 '}';
     }
 }
