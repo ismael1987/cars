@@ -1,12 +1,10 @@
 package com.cars.demo.view;
 
-import com.cars.demo.model.Color;
 import com.cars.demo.model.Country;
 import com.cars.demo.model.State;
 import com.cars.demo.repository.CountryRepository;
 import com.cars.demo.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
