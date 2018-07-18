@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Model {
+public class Modell {
     @Id
     @GeneratedValue
     private Long id;
@@ -15,7 +15,7 @@ public class Model {
     @ManyToOne
     private Brand brand;
 
-    public Model() {
+    public Modell() {
     }
 
     public Long getId() {
@@ -44,7 +44,7 @@ public class Model {
 
     @Override
     public String toString() {
-        return "Model{" +
+        return "Modell{" +
                 "id=" + id +
                 ", modelNumber='" + modelNumber + '\'' +
                 ", brand=" + brand +
