@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
@@ -13,6 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="countryScript.js"></script>
 </head>
 <body>
 
@@ -27,9 +27,6 @@
             <li class="nav-item"><a class="nav-link" href="/gear">Gear</a></li>
             <li class="nav-item"><a class="nav-link" href="/fuel">Fuel</a></li>
             <li class="nav-item"><a class="nav-link" href="/country">country</a></li>
-            <li class="nav-item"><a class="nav-link" href="/state">state</a></li>
-            <li class="nav-item"><a class="nav-link" href="/brand">brand</a></li>
-
         </ul>
         <ul class="navbar-nav ml-auto mt-2">
             <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
@@ -41,5 +38,30 @@
 
 </nav>
 
+<main class="container p-5">
+
+
+
+        <div class="form-group">
+            <form action="/state" method="post">
+            <input class="form-control" autofocus name="stateName" placeholder="stateName"  type="text"/>
+
+            <select autocomplete="off"  class="form-control" id="country" name="country"   onchange="StateDtl();">
+            <option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.countryName}"></option>
+            </select>
+
+                <button class="btn btn-primary" type="submit">Add</button>
+            </form>
+        </div>
+
+
+
+    <br>
+
+
+    <div id="datadiv"></div>
+
+
+</main>
 </body>
 </html>
