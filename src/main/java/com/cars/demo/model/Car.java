@@ -1,9 +1,6 @@
 package com.cars.demo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Car {
@@ -13,10 +10,13 @@ public class Car {
     @GeneratedValue
     Long id;
 
-    @OneToOne
+    private String mileage;
+    private String dateOfRegistration;
+
+    @ManyToOne
     Color color;
 
-    @OneToOne
+    @ManyToOne
     Gear gear;
 
 
@@ -47,10 +47,28 @@ public class Car {
         this.gear = gear;
     }
 
+    public String getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(String mileage) {
+        this.mileage = mileage;
+    }
+
+    public String getDateOfRegistration() {
+        return dateOfRegistration;
+    }
+
+    public void setDateOfRegistration(String dateOfRegistration) {
+        this.dateOfRegistration = dateOfRegistration;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "id=" + id +
+                ", mileage='" + mileage + '\'' +
+                ", dateOfRegistration='" + dateOfRegistration + '\'' +
                 ", color=" + color +
                 ", gear=" + gear +
                 '}';
