@@ -29,10 +29,10 @@ public class ModelView {
     public String getmodel(Model model){
         List<Brand> brands =brandRepository.findAll().stream().collect(Collectors.toList());
         model.addAttribute("brands",brands);
-        return "/modell";
+        return "/model";
     }
 
-    @PostMapping
+    @PostMapping("/model")
     public String addmodel(@Valid String modelNumber, HttpServletRequest request){
 
         Long brand =Long.parseLong(request.getParameter("brand"));
