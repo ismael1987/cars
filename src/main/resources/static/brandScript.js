@@ -1,6 +1,6 @@
 function BrandDtl(){
     let brandId =  document.getElementById("brand").value ;
-
+    alert(brandId);
     let parameters = {
         brand: brandId
 }
