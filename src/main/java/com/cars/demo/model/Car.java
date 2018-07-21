@@ -12,6 +12,7 @@ public class Car {
     Long id;
 
     private Long mileage;
+
     private Date dateOfRegistration;
 
     @ManyToOne

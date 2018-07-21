@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,11 +30,16 @@ public class ColorView {
     @Autowired
     ColorRepository colorRepository;
 
-    @GetMapping("/color")
-    public String getcolor(Model model){
+    @ModelAttribute("colors")
+    public List<Color> getcolors(){
         List<Color> collectColor = colorRepository.findAll().stream().collect(Collectors.toList());
-        model.addAttribute("colors",collectColor);
-        return "color";
+        return collectColor;
+    }
+
+
+    @GetMapping("/color")
+    public List<Color> getcolor(){
+        return  colorRepository.findAll().stream().collect(Collectors.toList());
     }
 
     @PostMapping("/color")
