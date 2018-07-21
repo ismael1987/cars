@@ -1,6 +1,7 @@
 package com.cars.demo.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Car {
@@ -10,8 +11,8 @@ public class Car {
     @GeneratedValue
     Long id;
 
-    private String mileage;
-    private String dateOfRegistration;
+    private Long mileage;
+    private Date dateOfRegistration;
 
     @ManyToOne
     Color color;
@@ -47,22 +48,6 @@ public class Car {
         this.gear = gear;
     }
 
-    public String getMileage() {
-        return mileage;
-    }
-
-    public void setMileage(String mileage) {
-        this.mileage = mileage;
-    }
-
-    public String getDateOfRegistration() {
-        return dateOfRegistration;
-    }
-
-    public void setDateOfRegistration(String dateOfRegistration) {
-        this.dateOfRegistration = dateOfRegistration;
-    }
-
     @Override
     public String toString() {
         return "Car{" +
@@ -72,5 +57,21 @@ public class Car {
                 ", color=" + color +
                 ", gear=" + gear +
                 '}';
+    }
+
+    public Long getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(Long mileage) {
+        this.mileage = mileage;
+    }
+
+    public Date getDateOfRegistration() {
+        return dateOfRegistration;
+    }
+
+    public void setDateOfRegistration(Date dateOfRegistration) {
+        this.dateOfRegistration = dateOfRegistration;
     }
 }
