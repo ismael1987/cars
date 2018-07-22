@@ -15,6 +15,14 @@ public class Car {
 
     private Date dateOfRegistration;
 
+    private Integer numberOfSeats;
+
+    private Long power;
+
+    private Integer numberOfDoors;
+
+    private Long price;
+
     @ManyToOne
     Modell modell;
     @ManyToOne
@@ -85,12 +93,48 @@ public class Car {
         this.brand = brand;
     }
 
+    public Integer getNumberOfSeats() {
+        return numberOfSeats;
+    }
+
+    public void setNumberOfSeats(Integer numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
+    }
+
+    public Long getPower() {
+        return power;
+    }
+
+    public void setPower(Long power) {
+        this.power = power;
+    }
+
+    public Integer getNumberOfDoors() {
+        return numberOfDoors;
+    }
+
+    public void setNumberOfDoors(Integer numberOfDoors) {
+        this.numberOfDoors = numberOfDoors;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "id=" + id +
                 ", mileage=" + mileage +
                 ", dateOfRegistration=" + dateOfRegistration +
+                ", numberOfSeats=" + numberOfSeats +
+                ", power=" + power +
+                ", numberOfDoors=" + numberOfDoors +
+                ", price=" + price +
                 ", modell=" + modell +
                 ", brand=" + brand +
                 ", color=" + color +
