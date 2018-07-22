@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>tackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<head>
+    <title>Brand</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <object th:include="resources :: head" th:remove="tag"></object>
 </head>
-<title>Brand</title>
-<link rel="stylesheet" href="https://s
 <body>
 
 <header>
@@ -58,6 +58,26 @@
             </select>
         </div>
              </div>
+         <div class="col-4">
+             <div class="input-group mb-3">
+                 <div class="input-group-prepend">
+                     <label class="input-group-text" for="color">Car Brand</label>
+                 </div>
+                 <select class="custom-select" id="brand" name="brand">
+                     <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.brandName}"></option>
+                 </select>
+             </div>
+         </div>
+         <div class="col-6">
+             <div class="input-group mb-3">
+                 <div class="input-group-prepend">
+                     <label class="input-group-text" for="color">Car Model</label>
+                 </div>
+                 <select class="custom-select" id="model" name="model">
+                     <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.modelNumber}"></option>
+                 </select>
+             </div>
+         </div>
      </div>
 
         <button class="btn btn-primary" type="submit">Add Car To Buy</button>
