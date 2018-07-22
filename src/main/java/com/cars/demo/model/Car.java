@@ -16,6 +16,10 @@ public class Car {
     private Date dateOfRegistration;
 
     @ManyToOne
+    Modell modell;
+    @ManyToOne
+    Brand brand;
+    @ManyToOne
     Color color;
 
     @ManyToOne
@@ -49,17 +53,6 @@ public class Car {
         this.gear = gear;
     }
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", mileage='" + mileage + '\'' +
-                ", dateOfRegistration='" + dateOfRegistration + '\'' +
-                ", color=" + color +
-                ", gear=" + gear +
-                '}';
-    }
-
     public Long getMileage() {
         return mileage;
     }
@@ -74,5 +67,34 @@ public class Car {
 
     public void setDateOfRegistration(Date dateOfRegistration) {
         this.dateOfRegistration = dateOfRegistration;
+    }
+
+    public Modell getModell() {
+        return modell;
+    }
+
+    public void setModell(Modell modell) {
+        this.modell = modell;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", mileage=" + mileage +
+                ", dateOfRegistration=" + dateOfRegistration +
+                ", modell=" + modell +
+                ", brand=" + brand +
+                ", color=" + color +
+                ", gear=" + gear +
+                '}';
     }
 }
