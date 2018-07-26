@@ -1,6 +1,7 @@
 package com.cars.demo.model;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 
 @Entity
@@ -22,6 +23,9 @@ public class Car {
     private Integer numberOfDoors;
 
     private Long price;
+
+    @Lob
+    private byte[] image;
 
     @ManyToOne
     Modell modell;
@@ -156,6 +160,14 @@ public class Car {
         this.fuel = fuel;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -166,6 +178,7 @@ public class Car {
                 ", power=" + power +
                 ", numberOfDoors=" + numberOfDoors +
                 ", price=" + price +
+                ", image=" + Arrays.toString(image) +
                 ", modell=" + modell +
                 ", brand=" + brand +
                 ", color=" + color +
