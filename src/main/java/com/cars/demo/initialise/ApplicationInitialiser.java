@@ -1,23 +1,21 @@
 package com.cars.demo.initialise;
 
-import com.cars.demo.model.Color;
-import com.cars.demo.model.Country;
-import com.cars.demo.model.Gear;
-import com.cars.demo.model.State;
-import com.cars.demo.repository.ColorRepository;
-import com.cars.demo.repository.CountryRepository;
-import com.cars.demo.repository.GearRepository;
-import com.cars.demo.repository.StateRepository;
+import com.cars.demo.model.*;
+import com.cars.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Configuration
 public class ApplicationInitialiser {
@@ -28,9 +26,22 @@ public class ApplicationInitialiser {
     @Autowired
     CountryRepository countryRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    UserRepository userRepository;
+
     @Bean
     ApplicationRunner  intialiseData(ColorRepository colorRepository, GearRepository gearRepository){
         return  args -> {
+
+            User user = new User();
+            user.setUsername("user");
+            user.setPassword(passwordEncoder.encode("user"));
+            user.setAuthorities(Stream.of("USER").collect(Collectors.toSet()));
+
+            userRepository.save(user);
           //  colorRepository.deleteAll();
            // String theColors = "Black,Whait,Red";
 
