@@ -15,7 +15,7 @@
 
 <main class="container p-5">
 
-    <form action="/addCar" method="post">
+    <form action="/addCar" method="post" enctype="multipart/form-data">
 
      <div class="row">
          <div class="col-2">
@@ -109,6 +109,12 @@
                  <select class="custom-select" id="fuel" name="fuel">
                      <option th:each="fuel : ${fuels}" th:value="${fuel.id}" th:text="${fuel.fueltype}"></option>
                  </select>
+             </div>
+         </div>
+
+         <div class="col-3">
+             <div class="input-group mb-3">
+                     <input type="file" name="pic" accept="image/*">
              </div>
          </div>
 

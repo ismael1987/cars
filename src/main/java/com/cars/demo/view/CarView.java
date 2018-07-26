@@ -8,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -67,7 +70,7 @@ public class CarView {
 
 
     @PostMapping("/addCar")
-    public String addCar(HttpServletRequest request){
+    public String addCar(HttpServletRequest request, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
 
         Car car = new Car();
 
@@ -104,8 +107,18 @@ public class CarView {
 
             String dateOfRegistration = request.getParameter("dateOfRegistration");
             car.setMileage(mileage);
-            carRepository.save(car);
 
+            try {
+                byte[] bytes = file.getBytes();
+                car.setImage(bytes);
+                //carRepository.save(car);
+                redirectAttributes.addFlashAttribute("flash.message", "Successfully uploaded");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("flash.message", "Failed to upload");
+                return "You failed to upload because " + " => " + e.getMessage();
+            }
+
+            carRepository.save(car);
 
         }
         return "index";
