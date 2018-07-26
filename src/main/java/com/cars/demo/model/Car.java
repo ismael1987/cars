@@ -31,9 +31,14 @@ public class Car {
 
     @ManyToOne
     Color color;
-
     @ManyToOne
     Gear gear;
+    @ManyToOne
+    Country country;
+    @ManyToOne
+    State state;
+    @ManyToOne
+    Fuel fuel;
 
 
     public Car() {
@@ -127,6 +132,30 @@ public class Car {
         this.price = price;
     }
 
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public Fuel getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(Fuel fuel) {
+        this.fuel = fuel;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -141,6 +170,9 @@ public class Car {
                 ", brand=" + brand +
                 ", color=" + color +
                 ", gear=" + gear +
+                ", country=" + country +
+                ", state=" + state +
+                ", fuel=" + fuel +
                 '}';
     }
 }

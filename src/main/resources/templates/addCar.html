@@ -38,7 +38,7 @@
             <input type="date" name="dateOfRegistration" id="dateOfRegistration">
         </div>
              </div>
-         <div class="col-2">
+         <div class="col-3">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="color">Car Color</label>
@@ -58,7 +58,7 @@
             </select>
         </div>
              </div>
-         <div class="col-4">
+         <div class="col-3">
              <div class="input-group mb-3">
                  <div class="input-group-prepend">
                      <label class="input-group-text" for="color">Car Brand</label>
@@ -68,7 +68,7 @@
                  </select>
              </div>
          </div>
-         <div class="col-6">
+         <div class="col-3">
              <div class="input-group mb-3">
                  <div class="input-group-prepend">
                      <label class="input-group-text" for="color">Car Model</label>
@@ -78,6 +78,40 @@
                  </select>
              </div>
          </div>
+
+         <div class="col-3">
+             <div class="input-group mb-3">
+                 <div class="input-group-prepend">
+                     <label class="input-group-text" for="color">Country</label>
+                 </div>
+                 <select class="custom-select" id="country" name="country">
+                     <option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.countryName}"></option>
+                 </select>
+             </div>
+         </div>
+
+         <div class="col-3">
+             <div class="input-group mb-3">
+                 <div class="input-group-prepend">
+                     <label class="input-group-text" for="color">States</label>
+                 </div>
+                 <select class="custom-select" id="state" name="state">
+                     <option th:each="state : ${states}" th:value="${state.id}" th:text="${state.stateName}"></option>
+                 </select>
+             </div>
+         </div>
+
+         <div class="col-3">
+             <div class="input-group mb-3">
+                 <div class="input-group-prepend">
+                     <label class="input-group-text" for="color">Fuel</label>
+                 </div>
+                 <select class="custom-select" id="fuel" name="fuel">
+                     <option th:each="fuel : ${fuels}" th:value="${fuel.id}" th:text="${fuel.fueltype}"></option>
+                 </select>
+             </div>
+         </div>
+
      </div>
 
         <button class="btn btn-primary" type="submit">Add Car To Buy</button>

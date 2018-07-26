@@ -32,6 +32,11 @@ public class CarView {
     ModelRepository modelRepository;
     @Autowired
     BrandRepository brandRepository;
+    @Autowired
+    CountryRepository countryRepository;
+    @Autowired
+    StateRepository stateRepository;
+
 
     @GetMapping("/addCar")
     public String buyCar(Model model){
@@ -48,6 +53,15 @@ public class CarView {
         List<Brand> brandList = brandRepository.findAll().stream().collect(Collectors.toList());
         model.addAttribute("brands",brandList);
 
+        List<Fuel> fuelList = fuelRepository.findAll().stream().collect(Collectors.toList());
+        model.addAttribute("fuels",fuelList);
+
+        List<Country> countryList = countryRepository.findAll().stream().collect(Collectors.toList());
+        model.addAttribute("countries",countryList);
+
+        List<State> stateList = stateRepository.findAll().stream().collect(Collectors.toList());
+        model.addAttribute("states",stateList);
+
         return "addCar";
     }
 
@@ -63,16 +77,29 @@ public class CarView {
         Long modelNo = Long.parseLong(request.getParameter("model"));
         Optional<Modell> existmodel = modelRepository.findAll().stream().filter(model -> model.getId().equals(modelNo)).findFirst();
 
+        Long countrylNo = Long.parseLong(request.getParameter("country"));
+        Optional<Country> existcountry = countryRepository.findAll().stream().filter(country -> country.getId().equals(countrylNo)).findFirst();
+
+        Long stateNo = Long.parseLong(request.getParameter("state"));
+        Optional<State> existstate = stateRepository.findAll().stream().filter(state -> state.getId().equals(stateNo)).findFirst();
+
+        Long fuelNo = Long.parseLong(request.getParameter("fuel"));
+        Optional<Fuel> existfuel = fuelRepository.findAll().stream().filter(fuel -> fuel.getId().equals(fuelNo)).findFirst();
+
+
         Long gearNo = Long.parseLong(request.getParameter("gear"));
         Optional<Gear> existGear = gearRepository.findAll().stream().filter(gear -> gear.getId().equals(gearNo)).findFirst();
 
         Long colorNo = Long.parseLong(request.getParameter("color"));
         Optional<Color> first = colorRepository.findAll().stream().filter(color -> color.getId().equals(colorNo)).findFirst();
-        if (first.isPresent() && existmodel.isPresent() && exsitBrand.isPresent()){
+        if (first.isPresent() && existmodel.isPresent() && exsitBrand.isPresent() && existcountry.isPresent() && existstate.isPresent() && existfuel.isPresent()){
             car.setColor(first.get());
             car.setBrand(exsitBrand.get());
             car.setModell(existmodel.get());
             car.setGear(existGear.get());
+            car.setCountry(existcountry.get());
+            car.setState(existstate.get());
+            car.setFuel(existfuel.get());
             Long mileage = Long.parseLong(request.getParameter("mileage"));
 
             String dateOfRegistration = request.getParameter("dateOfRegistration");
