@@ -25,8 +25,10 @@ public class Car {
 
     @ManyToOne
     Modell modell;
+
     @ManyToOne
     Brand brand;
+
     @ManyToOne
     Color color;
 
