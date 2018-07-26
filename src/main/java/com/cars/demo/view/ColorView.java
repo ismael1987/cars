@@ -24,7 +24,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
+@Controller
 public class ColorView {
 
     @Autowired
@@ -37,9 +37,10 @@ public class ColorView {
     }
 
 
-    @GetMapping("/colors")
-    public List<Color> getcolor(){
-        return  colorRepository.findAll().stream().collect(Collectors.toList());
+    @GetMapping("/color")
+    public String getcolor(){
+
+        return  "color";
     }
 
 

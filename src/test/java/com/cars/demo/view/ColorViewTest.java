@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(controllers = ColorView.class)
 @WebAppConfiguration
-class ColorViewTest {
+public class ColorViewTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -68,7 +68,7 @@ class ColorViewTest {
 
         when(colorView.getcolors()).thenReturn(Arrays.asList(color1,color2));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/colors"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/color"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("color"))
