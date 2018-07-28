@@ -74,7 +74,7 @@ public class BrandViewTest {
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("brand"))
                 .andExpect(model().attribute("brands", hasSize(2)))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("brand"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("brands"))
                 .andExpect(model().attribute("brands",hasItem(
                         allOf(
                                 hasProperty("id",is(1L)),

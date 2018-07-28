@@ -23,16 +23,16 @@ public class BrandView {
     @Autowired
     private RepositoryServices repositoryServices;
 
-    @ModelAttribute("fuels")
+    @ModelAttribute("brands")
     public List<Brand> getbrands(){
         List<Brand> collectBrand = repositoryServices.getAllbrand();
         return collectBrand;
     }
 
     @GetMapping("/brand")
-    public String getbrand(Model model){
-        List<Brand> collectBrand = brandRepository.findAll().stream().collect(Collectors.toList());
-        model.addAttribute("brands",collectBrand);
+    public String getbrand(){
+        //List<Brand> collectBrand = brandRepository.findAll().stream().collect(Collectors.toList());
+        //model.addAttribute("brands",collectBrand);
       return "brand";
     }
 
