@@ -13,6 +13,7 @@ package com.cars.demo.view;
 import com.cars.demo.model.Color;
 import com.cars.demo.repository.ColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,16 +37,19 @@ public class ColorView {
         return collectColor;
     }
 
-
+    @Secured("ADMIN")
     @GetMapping("/color")
     public String getcolor(){
 
         return  "color";
     }
 
-
+    //@Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN, AuthoritiesConstants.ANONYMOUS})
+    @Secured("ADMIN")
     @PostMapping("/color")
     String addColor(@Valid  String color){
+        System.out.println("*****************************************");
+        System.out.println("*****************************************");
         Color newcolor = new Color(color);
         colorRepository.save(newcolor);
         return "index";

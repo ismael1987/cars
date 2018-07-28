@@ -36,12 +36,24 @@ public class ApplicationInitialiser {
     ApplicationRunner  intialiseData(ColorRepository colorRepository, GearRepository gearRepository){
         return  args -> {
 
+
+
             User user = new User();
             user.setUsername("user");
             user.setPassword(passwordEncoder.encode("user"));
             user.setAuthorities(Stream.of("USER").collect(Collectors.toSet()));
+            if (!userRepository.findOneByUsername("user").isPresent())
+                    userRepository.save(user);
 
-            userRepository.save(user);
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(passwordEncoder.encode("admin"));
+            admin.setAuthorities(Stream.of("ADMIN").collect(Collectors.toSet()));
+            if (!userRepository.findOneByUsername("admin").isPresent())
+                userRepository.save(admin);
+
+
+
           //  colorRepository.deleteAll();
            // String theColors = "Black,Whait,Red";
 

@@ -3,7 +3,7 @@ package com.cars.demo.configuration;
 
 import com.cars.demo.security.UserDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,30 +28,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().permitAll();
-        /* http.authorizeRequests()
-                .requestMatchers().permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().fullyAuthenticated()
-                .and()
-                .formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
-                .and()
-                .logout().permitAll();
-   */ }
+        //http.authorizeRequests().any;
+
+         http.authorizeRequests()
+                 .antMatchers("/").permitAll()
+//                 .antMatchers("/Color/**").hasAuthority("ADMIN")
+                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+//                 .anyRequest().fullyAuthenticated()
+                 .and()
+                 .formLogin().loginPage("/login").failureUrl("/login").permitAll()
+                 .and()
+                 .logout().permitAll();
+    }
 
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        List<UserDetails> users = Stream.of(
-                User.withUsername("user").password(encoder.encode("user")).roles("USER").build(),
-                User.withUsername("admin").password(encoder.encode("admin")).roles("USER", "ADMIN").build()
-
-        ).collect(Collectors.toList());
-        return new InMemoryUserDetailsManager(users);
-    }
+    //th:text="${loggedUserName}">Lidia</span></
+    //th:if="${param.logout}">You have been logged out</p>
 
 }
