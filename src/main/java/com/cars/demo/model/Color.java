@@ -1,8 +1,13 @@
 package com.cars.demo.model;
 
+import org.springframework.lang.NonNull;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Color {
@@ -11,6 +16,9 @@ public class Color {
     @GeneratedValue
     Long id;
 
+    @NotNull
+    @Column(nullable = false)
+    @Size(min=1 , max=255)
     String description;
 
 

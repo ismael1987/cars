@@ -67,7 +67,8 @@ public class CountryViewTest {
 
         Country country2 = new Country();
         country2.setId(2L);
-        country2.setCountryName("germany");
+        country2
+                .setCountryName("germany");
 
         when(countryView.getCountries()).thenReturn(Arrays.asList(country1,country2));
 

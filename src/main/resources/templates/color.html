@@ -3,6 +3,12 @@
 <head>
     <title>Color</title>
     <object th:include="resources :: head" th:remove="tag"></object>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!--
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+-->
+
 </head>
 <body>
 
@@ -10,14 +16,16 @@
     <object th:include="toolBar :: menu" th:remove="tag"></object>
 </header>
 
+<div id="error"></div>
+
 <main class="container p-5">
 
     <form action="/color" method="POST">
 
         <div class="form-group">
-            <input class="form-control" name="color" placeholder="color"  type="text"/>
+            <input class="form-control" name="color" id="color" placeholder="color"  type="text"/>
         </div>
-        <button class="btn btn-primary" type="submit">Add</button>
+        <button class="btn btn-primary" type="submit" id="submit">Add</button>
     </form>
 
     <br>
@@ -31,5 +39,30 @@
     </table>
 
 </main>
+
+<script type="text/javascript">
+          $("form").submit(function(e) {
+              var error = "";
+
+              if ($("#color").val() == "") {
+                  error += "The Color  field is required.<br>"
+
+              }
+              if (error != "") {
+                 $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
+
+
+                  return false;
+
+              } else {
+                  return true;
+
+              }
+          })
+
+    </script>
+
+
+
 </body>
 </html>

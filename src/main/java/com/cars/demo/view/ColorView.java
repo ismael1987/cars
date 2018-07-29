@@ -38,11 +38,11 @@ public class ColorView {
     }
 
 
-    @PostMapping("/colors")
+    @PostMapping("/color")
     public String addColor(@Valid String color){
         Color newcolor = new Color(color);
         colorRepository.save(newcolor);
-        return "index";
+        return "color";
     }
 
 }
