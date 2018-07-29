@@ -1,12 +1,8 @@
 package com.cars.demo.service;
 
 
-import com.cars.demo.model.Brand;
-import com.cars.demo.model.Fuel;
-import com.cars.demo.model.Gear;
-import com.cars.demo.repository.BrandRepository;
-import com.cars.demo.repository.FuelRepository;
-import com.cars.demo.repository.GearRepository;
+import com.cars.demo.model.*;
+import com.cars.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -26,6 +22,11 @@ public class RepositoryServices {
     @Autowired
     private GearRepository gearRepository;
 
+    @Autowired
+    private CountryRepository countryRepository;
+
+
+
     public List<Fuel> getAllFuel(){
         return fuelRepository.findAll().stream().collect(Collectors.toList());
     }
@@ -37,5 +38,10 @@ public class RepositoryServices {
     public List<Gear> getAllgear(){
         return gearRepository.findAll().stream().collect(Collectors.toList());
     }
+
+    public List<Country> getAllcountry(){
+        return countryRepository.findAll().stream().collect(Collectors.toList());
+    }
+
 
 }

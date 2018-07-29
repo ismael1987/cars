@@ -1,6 +1,6 @@
 package com.cars.demo.view;
 
-import com.cars.demo.model.Gear;
+import com.cars.demo.model.Country;
 import com.cars.demo.service.RepositoryServices;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,23 +27,24 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@WebMvcTest(controllers = GearView.class)
+@WebMvcTest(controllers = CountryView.class)
 @WebAppConfiguration
-public class GearViewTest {
+public class CountryViewTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private GearView gearView;
+    private CountryView countryView;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
     @MockBean
-    private GearView getGearView;
+    private CountryView getCountryView;
 
     @Mock
     private RepositoryServices repositoryServices;
@@ -59,33 +60,33 @@ public class GearViewTest {
 
 
     @Test
-    public void getgear() throws Exception{
-        Gear gear1 = new Gear();
-        gear1.setId(1L);
-        gear1.setGeartype("auto");
+    public void getcountry() throws Exception {
+        Country country1 = new Country();
+        country1.setId(1L);
+        country1.setCountryName("austria");
 
-        Gear gear2= new Gear();
-        gear2.setId(2L);
-        gear2.setGeartype("manual");
+        Country country2 = new Country();
+        country1.setId(2L);
+        country1.setCountryName("germany");
 
-        when(gearView.getGears()).thenReturn(Arrays.asList(gear1,gear2));
+        when(countryView.getCountries()).thenReturn(Arrays.asList(country1,country2));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/gear"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/country"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(view().name("gear"))
-                .andExpect(model().attribute("gears", hasSize(2)))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("gears"))
-                .andExpect(model().attribute("gears",hasItem(
+                .andExpect(view().name("country"))
+                .andExpect(model().attribute("countrys", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("countrys"))
+                .andExpect(model().attribute("countrys",hasItem(
                         allOf(
                                 hasProperty("id",is(1L)),
-                                hasProperty("geartype" ,  is("auto"))
+                                hasProperty("countryName" ,  is("austria"))
                         )
                 )))
-                .andExpect(model().attribute("gears",hasItem(
+                .andExpect(model().attribute("countrys",hasItem(
                         allOf(
                                 hasProperty("id",is(2L)),
-                                hasProperty("geartype" ,  is("manual"))
+                                hasProperty("countryName" ,  is("germany"))
                         )
                 )))
                 .andDo(print());
