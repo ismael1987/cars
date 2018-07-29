@@ -1,39 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Error Page</title>
-    <object th:include="resources :: head" th:remove="tag"></object>
-    <link href='https://fonts.googleapis.com/css?family=Anton|Passion+One|PT+Sans+Caption' rel='stylesheet' type='text/css'>
-</head>
-
-<body>
-<header>
-    <object th:include="toolBar :: menu" th:remove="tag"></object>
-</header>
-
-
-
-<!-- Error Page -->
-<div class="error">
-    <div class="container-floud">
-        <div class="col-xs-12 ground-color text-center">
-            <div class="container-error-404">
-                <div class="clip"><div class="shadow"><span class="digit thirdDigit"></span></div></div>
-                <div class="clip"><div class="shadow"><span class="digit secondDigit"></span></div></div>
-                <div class="clip"><div class="shadow"><span class="digit firstDigit"></span></div></div>
-                <div class="msg">OH!<span class="triangle"></span></div>
-            </div>
-            <h2 class="h1">Sorry! Page not found</h2>
-        </div>
-    </div>
-</div>
-<!-- Error Page -->
-
-</body>
-</html>
-
-<script>
-      function randomNum()
+  function randomNum()
         {
             "use strict";
             return Math.floor(Math.random() * 9)+1;
@@ -79,5 +44,3 @@
                     i++;
                 }
             }, time);
-
-</script>

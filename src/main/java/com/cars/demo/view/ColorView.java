@@ -13,9 +13,7 @@ package com.cars.demo.view;
 import com.cars.demo.model.Color;
 import com.cars.demo.repository.ColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,7 +38,7 @@ public class ColorView {
     }
 
 
-    @PostMapping("/color")
+    @PostMapping("/colors")
     public String addColor(@Valid String color){
         Color newcolor = new Color(color);
         colorRepository.save(newcolor);
