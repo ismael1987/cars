@@ -6,25 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
+
     @Autowired
     private UserDetailsServiceImp userDetailsService;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -32,20 +27,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
          http.authorizeRequests()
                  .antMatchers("/").permitAll()
-//                 .antMatchers("/Color/**").hasAuthority("ADMIN")
                  .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-//                 .anyRequest().fullyAuthenticated()
+//                 .antMatchers("/color").permitAll()
+                 //.antMatchers("/color").hasAuthority("ADMIN")
+                 .antMatchers("/color").permitAll()
+                 .antMatchers("/color/**").permitAll()
                  .and()
                  .formLogin().loginPage("/login").failureUrl("/login").permitAll()
                  .and()
-                 .logout().permitAll();
+                 .logout().permitAll()
+                 .and().csrf().disable();
     }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProviderUser());
+      //  auth.authenticationProvider(authenticationProviderAdmin());
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProviderUser() {
+        DaoAuthenticationProvider authProvider
+                = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
 
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     //th:text="${loggedUserName}">Lidia</span></
     //th:if="${param.logout}">You have been logged out</p>
 

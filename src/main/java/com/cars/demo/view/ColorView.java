@@ -16,10 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -37,23 +34,17 @@ public class ColorView {
         return collectColor;
     }
 
-    @Secured("ADMIN")
     @GetMapping("/color")
     public String getcolor(){
-
         return  "color";
     }
 
-    //@Secured({AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN, AuthoritiesConstants.ANONYMOUS})
-    @Secured("ADMIN")
+
     @PostMapping("/color")
-    String addColor(@Valid  String color){
-        System.out.println("*****************************************");
-        System.out.println("*****************************************");
+    public String addColor(@Valid String color){
         Color newcolor = new Color(color);
         colorRepository.save(newcolor);
         return "index";
     }
-
 
 }
