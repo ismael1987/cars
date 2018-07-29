@@ -66,8 +66,8 @@ public class CountryViewTest {
         country1.setCountryName("austria");
 
         Country country2 = new Country();
-        country1.setId(2L);
-        country1.setCountryName("germany");
+        country2.setId(2L);
+        country2.setCountryName("germany");
 
         when(countryView.getCountries()).thenReturn(Arrays.asList(country1,country2));
 
@@ -75,15 +75,15 @@ public class CountryViewTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("country"))
-                .andExpect(model().attribute("countrys", hasSize(2)))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("countrys"))
-                .andExpect(model().attribute("countrys",hasItem(
+                .andExpect(model().attribute("countries", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("countries"))
+                .andExpect(model().attribute("countries",hasItem(
                         allOf(
                                 hasProperty("id",is(1L)),
                                 hasProperty("countryName" ,  is("austria"))
                         )
                 )))
-                .andExpect(model().attribute("countrys",hasItem(
+                .andExpect(model().attribute("countries",hasItem(
                         allOf(
                                 hasProperty("id",is(2L)),
                                 hasProperty("countryName" ,  is("germany"))

@@ -23,7 +23,7 @@ public class CountryView {
     @Autowired
     RepositoryServices repositoryServices;
 
-    @ModelAttribute("countrys")
+    @ModelAttribute("countries")
     public List<Country> getCountries(){
         List<Country> collectcountries = repositoryServices.getAllcountry();
         return collectcountries;
@@ -31,14 +31,11 @@ public class CountryView {
 
     @GetMapping("/country")
     public String getcountry(){
-        //List<Country> collectCountry = countryRepository.findAll().stream().collect(Collectors.toList());
-       // model.addAttribute("countries",collectCountry);
         return "country";
     }
 
     @PostMapping("/country")
     public String addcountry(@Valid String country){
-
         Country newcountry = new Country(country);
         countryRepository.save(newcountry);
         return "index";
