@@ -46,7 +46,7 @@ public class ColorView {
             Color newcolor = new Color(color);
             colorRepository.save(newcolor);
         }
-        return "color";
+        return "redirect:color";
     }
 
 }
