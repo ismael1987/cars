@@ -40,6 +40,6 @@ public class BrandView {
     public String addbrand(@Valid String brand){
         Brand newbrand= new Brand(brand);
         brandRepository.save(newbrand);
-        return "index" ;
+        return "redirect:brand" ;
     }
 }

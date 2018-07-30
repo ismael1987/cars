@@ -34,19 +34,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GearViewTest {
 
     @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
     private GearView gearView;
 
+
     @Autowired
-    private WebApplicationContext webApplicationContext;
+    private MockMvc mockMvc;
 
     @MockBean
     private GearView getGearView;
 
     @Mock
     private RepositoryServices repositoryServices;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
     @Mock
     private Model model;

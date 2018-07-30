@@ -1,6 +1,7 @@
 package com.cars.demo.view;
 
-import com.cars.demo.model.Color;
+import com.cars.demo.model.Country;
+import com.cars.demo.model.State;
 import com.cars.demo.service.RepositoryServices;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,29 +24,27 @@ import java.util.Arrays;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@WebMvcTest(controllers = ColorView.class)
+@WebMvcTest(controllers = StateView.class)
 @WebAppConfiguration
-public class ColorViewTest {
+public class StateViewTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ColorView colorView;
-
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
     @MockBean
-    private ColorView getColorView;
+    private StateView stateView;
 
     @Mock
     private RepositoryServices repositoryServices;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
     @Mock
     private Model model;
@@ -55,41 +54,52 @@ public class ColorViewTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
+
     @Test
-    public void getcolor() throws Exception{
+    public void getState() {
+        Country country = new Country();
+        country.setId(1L);
+        country.setCountryName("Austria");
 
-        Color color1 = new Color();
-        color1.setId(1L);
-        color1.setDescription("red");
 
-        Color color2 = new Color();
-        color2.setId(2L);
-        color2.setDescription("blue");
+        State state1 = new State();
+        state1.setId(1L);
+        state1.setStateName("Vienna");
+        state1.setCountry(country);
 
-        when(colorView.getcolors()).thenReturn(Arrays.asList(color1,color2));
+        State state2 = new State();
+        state2.setId(2L);
+        state2.setStateName("Nieder Österreich");
+        state2.setCountry(country);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/admin/color"))
+/*
+
+        when(stateView.getState()).thenReturn(Arrays.asList(gear1,gear2));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/gear"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(view().name("color"))
-                .andExpect(model().attribute("colors", hasSize(2)))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("colors"))
-                .andExpect(model().attribute("colors",hasItem(
+                .andExpect(view().name("gear"))
+                .andExpect(model().attribute("gears", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("gears"))
+                .andExpect(model().attribute("gears",hasItem(
                         allOf(
                                 hasProperty("id",is(1L)),
-                                hasProperty("description" ,  is("red"))
+                                hasProperty("geartype" ,  is("auto"))
                         )
                 )))
-                .andExpect(model().attribute("colors",hasItem(
+                .andExpect(model().attribute("gears",hasItem(
                         allOf(
                                 hasProperty("id",is(2L)),
-                                hasProperty("description" ,  is("blue"))
+                                hasProperty("geartype" ,  is("manual"))
                         )
                 )))
-                .andDo(print());
+
+
+
+
+*/
+
 
     }
-
-
-
 }

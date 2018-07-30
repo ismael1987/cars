@@ -26,6 +26,8 @@ public class StateView {
     @Autowired
     CountryRepository countryRepository;
 
+
+
     @GetMapping("/state")
     public String getState(Model model){
         List<Country> countries = countryRepository.findAll().stream().collect(Collectors.toList());
@@ -36,9 +38,9 @@ public class StateView {
 
     @PostMapping("/state")
     public String postState(@Valid String stateName , HttpServletRequest request){
-        System.out.println("***************************");
-        Long country = Long.parseLong(request.getParameter("country"));
 
+
+        Long country = Long.parseLong(request.getParameter("country"));
 
 
         Optional<Country> countryFind = countryRepository.findAll().stream().filter(cn -> cn.getId().equals(country)).findFirst();

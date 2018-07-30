@@ -39,6 +39,6 @@ public class CountryView {
 
         Country newcountry = new Country(country);
         countryRepository.save(newcountry);
-        return "index";
+        return "redirect:country";
     }
 }
