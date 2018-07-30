@@ -17,7 +17,7 @@ public class Color {
     Long id;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false ,  unique = true)
     @Size(min=1 , max=255)
     String description;
 

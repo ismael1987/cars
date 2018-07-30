@@ -23,7 +23,7 @@
     <form action="/color" method="POST">
 
         <div class="form-group">
-            <input class="form-control" name="color" id="color" placeholder="color"  type="text"/>
+            <input class="form-control" name="color" id="color" placeholder="color"  type="text" required/>
         </div>
         <button class="btn btn-primary" type="submit" id="submit">Add</button>
     </form>
@@ -40,27 +40,38 @@
 
 </main>
 
+<!--
 <script type="text/javascript">
+    $('#color').blur(function(){
+        var error='';
+        $.getJSON("/getColor", parameters , function(data) {
+               if (data.description != "NoColor"){
+                    error += " This Color "+$("#color").val()+" is already Exists";
+                }
+         if (error != "") {
+                  $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
+         }
+
+})
           $("form").submit(function(e) {
               var error = "";
-
               if ($("#color").val() == "") {
                   error += "The Color  field is required.<br>"
-
               }
-              if (error != "") {
-                 $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
+              let parameters = { id :-1 , description: $("#color").val()};
+              $.getJSON("/getColor", parameters , function(data) {
+               if (data.description != "NoColor"){
+                    error += " This Color "+$("#color").val()+" is already Exists";}
+              }) ;
 
-
-                  return false;
-
-              } else {
-                  return true;
-
-              }
+                if (error != "") {
+                    $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
+                }
+                return false;
           })
 
     </script>
+-->
 
 
 

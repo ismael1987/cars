@@ -40,8 +40,12 @@ public class ColorView {
 
     @PostMapping("/color")
     public String addColor(@Valid String color){
-        Color newcolor = new Color(color);
-        colorRepository.save(newcolor);
+
+        long count = colorRepository.findAll().stream().filter(e -> e.getDescription().equalsIgnoreCase(color)).count();
+        if (count == 0L){
+            Color newcolor = new Color(color);
+            colorRepository.save(newcolor);
+        }
         return "color";
     }
 
