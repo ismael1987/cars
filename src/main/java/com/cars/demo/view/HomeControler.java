@@ -8,15 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import java.security.Principal;
 
 
 @Controller
-
+@SessionAttributes("IsLog")
+@ControllerAdvice
 public class HomeControler {
 
     @GetMapping("/")
@@ -30,7 +28,7 @@ public class HomeControler {
     }
 
     @ModelAttribute("IsLog")
-    String getIsLog() {
+    public String getIsLog() {
         if (SecurityContextHolder.getContext().getAuthentication().getName().
                 equals("anonymousUser")) {
             return  "NotLoged";

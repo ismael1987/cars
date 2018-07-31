@@ -27,6 +27,9 @@ public class ColorView {
     @Autowired
     ColorRepository colorRepository;
 
+    @Autowired
+    HomeControler homeControler;
+
     @ModelAttribute("colors")
     public List<Color> getcolors(){
         List<Color> collectColor = colorRepository.findAll().stream().collect(Collectors.toList());
