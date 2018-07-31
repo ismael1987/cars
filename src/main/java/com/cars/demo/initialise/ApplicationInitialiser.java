@@ -36,20 +36,25 @@ public class ApplicationInitialiser {
     ApplicationRunner  intialiseData(ColorRepository colorRepository, GearRepository gearRepository){
         return  args -> {
 
-
-
             User user = new User();
-            user.setUsername("user");
+            user.setFirstName("First");
+            user.setLastName("Last");
+            user.setLogin("user");
             user.setPassword(passwordEncoder.encode("user"));
             user.setAuthorities(Stream.of("USER").collect(Collectors.toSet()));
-            if (!userRepository.findOneByUsername("user").isPresent())
+            user.setEmail("user@cars.at");
+            if (!userRepository.findOneByLogin("user").isPresent())
                     userRepository.save(user);
 
             User admin = new User();
-            admin.setUsername("admin");
+            admin.setFirstName("First");
+            admin.setLastName("Last");
+            admin.setLogin("admin");
+
             admin.setPassword(passwordEncoder.encode("admin"));
             admin.setAuthorities(Stream.of("ADMIN").collect(Collectors.toSet()));
-            if (!userRepository.findOneByUsername("admin").isPresent())
+            admin.setEmail("admin@cars.at");
+            if (!userRepository.findOneByLogin("admin").isPresent())
                 userRepository.save(admin);
 
 

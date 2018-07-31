@@ -19,10 +19,10 @@ public class UserDetailsServiceImp implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        Optional<User> user = userRepository.findOneByUsername(username);
+    public UserDetails loadUserByUsername(String login) {
+        Optional<User> user = userRepository.findOneByLogin(login);
         if (!user.isPresent()) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(login);
         }
         return new UserPrincipal(user.get());
     }
