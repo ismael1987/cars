@@ -3,18 +3,22 @@
 <head>
     <title>country</title>
     <object th:include="resources :: head" th:remove="tag"></object>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 </head>
 <body>
 <header>
     <object th:include="toolBar :: menu" th:remove="tag"></object>
 </header>
 
+<div id="error"></div>
+
 <main class="container p-5">
 
     <form action="/country" method="post">
 
         <div class="form-group">
-            <input class="form-control" name="country" placeholder="country"  type="text"/>
+            <input class="form-control" name="country" placeholder="country"  type="text" required/>
         </div>
         <button class="btn btn-primary" type="submit">Add</button>
     </form>
