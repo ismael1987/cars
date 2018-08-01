@@ -48,9 +48,10 @@ public class FuelView {
 
     @PostMapping("/fuel")
     public String addfuel(@Valid String fuel){
-     Fuel newfuel = new Fuel(fuel);
-     fuelRepository.save(newfuel);
-        return "index";
-
-    }
+        long count = fuelRepository.findAll().stream().filter(e -> e.getFueltype().equalsIgnoreCase(fuel)).count();
+        if(count == 0L){
+            Fuel newfuel = new Fuel(fuel);
+            fuelRepository.save(newfuel);
+        }
+        return "redirect:fuel";    }
 }
