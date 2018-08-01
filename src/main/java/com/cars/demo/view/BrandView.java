@@ -38,8 +38,13 @@ public class BrandView {
 
     @PostMapping("/brand")
     public String addbrand(@Valid String brand){
-        Brand newbrand= new Brand(brand);
-        brandRepository.save(newbrand);
+        long count = brandRepository.findAll().stream().filter(e -> e.getBrandName().equalsIgnoreCase(brand)).count();
+
+        if(count == 0L){
+            Brand newbrand= new Brand(brand);
+            brandRepository.save(newbrand);
+        }
+
         return "redirect:brand" ;
     }
 }
