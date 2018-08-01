@@ -9,12 +9,15 @@
 <header>
     <object th:include="toolBar :: menu" th:remove="tag"></object>
 </header>
+
+<div id="error"></div>
+
 <main class="container p-5">
 
     <form action="/gear" method="post">
 
         <div class="form-group">
-            <input class="form-control" name="gear" placeholder="gear type"  type="text"/>
+            <input class="form-control" name="gear" placeholder="gear type"  type="text" required/>
         </div>
         <button class="btn btn-primary" type="submit">Add</button>
     </form>

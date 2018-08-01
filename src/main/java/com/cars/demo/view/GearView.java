@@ -21,6 +21,9 @@ public class GearView {
     GearRepository gearRepository;
 
     @Autowired
+    HomeControler homeControler;
+
+    @Autowired
     RepositoryServices repositoryServices;
 
     @ModelAttribute("gears")
@@ -38,8 +41,12 @@ public class GearView {
 
     @PostMapping("gear")
     public String addgear(@Valid String gear){
-        Gear newgear = new Gear(gear);
-        gearRepository.save(newgear);
-        return "index";
+
+        long count = gearRepository.findAll().stream().filter(e -> e.getGeartype().equalsIgnoreCase(gear)).count();
+        if (count == 0L) {
+            Gear newgear = new Gear(gear);
+            gearRepository.save(newgear);
+        }
+        return "redirect:index";
     }
 }

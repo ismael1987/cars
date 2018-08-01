@@ -58,7 +58,6 @@ public class CountryViewTest {
     }
 
 
-
     @Test
     public void getcountry() throws Exception {
         Country country1 = new Country();

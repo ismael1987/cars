@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(controllers = BrandView.class)
 @WebAppConfiguration
+
 public class BrandViewTest {
 
     @Autowired
