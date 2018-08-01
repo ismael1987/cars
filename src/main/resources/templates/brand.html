@@ -3,6 +3,8 @@
 <head>
     <title>Brand</title>
     <object th:include="resources :: head" th:remove="tag"></object>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 </head>
 <body>
 
@@ -10,14 +12,14 @@
     <object th:include="toolBar :: menu" th:remove="tag"></object>
 </header>
 
-
+<div id="error"></div>
 
 <main class="container p-5">
 
     <form action="/brand" method="post">
 
         <div class="form-group">
-            <input class="form-control" name="brand" placeholder="brand"  type="text"/>
+            <input class="form-control" name="brand" placeholder="brand"  type="text" required/>
         </div>
         <button class="btn btn-primary" type="submit">Add</button>
     </form>
