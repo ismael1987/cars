@@ -2,12 +2,17 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <object th:include="resources ::head" th:remove="tag"></object>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <title>fuel</title>
 </head>
 <body>
 <header>
     <object th:include="toolBar :: menu" th:remove="tag"></object>
 </header>
+
+<div id="error"></div>
+
 <main class="container p-5">
 
     <form action="/fuel" method="post">
