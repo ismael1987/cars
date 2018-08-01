@@ -47,6 +47,6 @@ public class GearView {
             Gear newgear = new Gear(gear);
             gearRepository.save(newgear);
         }
-        return "redirect:index";
+        return "redirect:gear";
     }
 }
