@@ -63,7 +63,7 @@
                  <div class="input-group-prepend">
                      <label class="input-group-text" for="color">Car Brand</label>
                  </div>
-                 <select class="custom-select" id="brand" name="brand">
+                 <select class="custom-select" id="brand" name="brand" onchange="BrandDtl();">
                      <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.brandName}"></option>
                  </select>
              </div>
