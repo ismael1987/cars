@@ -36,9 +36,11 @@ public class CountryView {
 
     @PostMapping("/country")
     public String addcountry(@Valid String country){
-
-        Country newcountry = new Country(country);
-        countryRepository.save(newcountry);
+        long count1 = countryRepository.findAll().stream().filter(e -> e.getCountryName().equalsIgnoreCase(country)).count();
+        if(count1 == 0L){
+            Country newcountry = new Country(country);
+            countryRepository.save(newcountry);
+        }
         return "redirect:country";
     }
 }

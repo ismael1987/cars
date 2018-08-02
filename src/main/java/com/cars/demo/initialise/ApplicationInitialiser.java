@@ -33,7 +33,7 @@ public class ApplicationInitialiser {
     UserRepository userRepository;
 
     @Bean
-    ApplicationRunner  intialiseData(ColorRepository colorRepository, GearRepository gearRepository){
+    ApplicationRunner  intialiseData(ColorRepository colorRepository, GearRepository gearRepository, StateRepository stateRepository){
         return  args -> {
 
             User user = new User();
@@ -74,13 +74,13 @@ public class ApplicationInitialiser {
             gearRepository.findAll().stream().forEach(gear -> gear.toString());
 
 
-            stateRepository.deleteAll();
-            String theState = "Burgenland,Kärnten,Niederösterreich,Oberösterreich,Salzburg,Steiermark,Tirol,Vorarlberg,Wien";
-            List<Country> allCountry = countryRepository.findAll();
-            if (allCountry.size() >0 ) {
-                Country country = allCountry.get(0);
-                Arrays.stream(theState.split(",")).collect(Collectors.toList()).stream().map(e -> new State(e, country)).forEach(state -> stateRepository.save(state));
-            }
+           // stateRepository.deleteAll();
+            //String theState = "Burgenland,Kärnten,Niederösterreich,Oberösterreich,Salzburg,Steiermark,Tirol,Vorarlberg,Wien";
+            //List<Country> allCountry = countryRepository.findAll();
+            //if (allCountry.size() >0 ) {
+              //  Country country = allCountry.get(0);
+                //Arrays.stream(theState.split(",")).collect(Collectors.toList()).stream().map(e -> new State(e, country)).forEach(state -> stateRepository.save(state));
+            //}
 
 
         };

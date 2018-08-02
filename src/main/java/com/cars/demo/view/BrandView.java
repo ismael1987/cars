@@ -44,7 +44,6 @@ public class BrandView {
             Brand newbrand= new Brand(brand);
             brandRepository.save(newbrand);
         }
-
         return "redirect:brand" ;
     }
 }
