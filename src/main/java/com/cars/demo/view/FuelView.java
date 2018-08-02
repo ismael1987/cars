@@ -37,7 +37,7 @@ public class FuelView {
 
     @GetMapping("/fuel" )
     public String getfuel(){
-        
+
         return "fuel";
     }
 
