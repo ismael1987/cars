@@ -19,7 +19,12 @@
             <select autocomplete="off"  class="form-control" id="brand" name="brand"   onchange="BrandDtl();">
                 <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.brandName}"></option>
             </select>
-            <button class="btn btn-primary" type="submit">Add</button>
+
+                <button class="btn btn-primary" type="submit">Add</button>
+
+
+            <!--<button class="btn btn-primary" type="submit">Add</button>
+            -->
         </form>
     </div>
 

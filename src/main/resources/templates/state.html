@@ -21,8 +21,8 @@
             <select autocomplete="off"  class="form-control" id="country" name="country"   onchange="StateDtl();">
             <option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.countryName}"></option>
             </select>
-
                 <button class="btn btn-primary" type="submit">Add</button>
+
             </form>
         </div>
 
