@@ -81,8 +81,6 @@ public class ApplicationInitialiser {
               //  Country country = allCountry.get(0);
                 //Arrays.stream(theState.split(",")).collect(Collectors.toList()).stream().map(e -> new State(e, country)).forEach(state -> stateRepository.save(state));
             //}
-
-
         };
 
 

@@ -1,19 +1,16 @@
 package com.cars.demo.view;
 
 import com.cars.demo.model.Country;
-import com.cars.demo.model.Gear;
 import com.cars.demo.repository.CountryRepository;
 import com.cars.demo.service.RepositoryServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class CountryView {
@@ -36,6 +33,7 @@ public class CountryView {
 
     @PostMapping("/country")
     public String addcountry(@Valid String country){
+
         long count1 = countryRepository.findAll().stream().filter(e -> e.getCountryName().equalsIgnoreCase(country)).count();
         if(count1 == 0L){
             Country newcountry = new Country(country);

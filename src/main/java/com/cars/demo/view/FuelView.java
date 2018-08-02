@@ -36,10 +36,8 @@ public class FuelView {
 
 
     @GetMapping("/fuel" )
-    public String getfuel(final  Model model){
-        //List<Fuel> collectfuel = repositoryServices.findAll().stream().collect(Collectors.toList());
-//        model.addAttribute("fuels",repositoryServices.getAllFuel());
-        //System.out.println(repositoryServices.getAllFuel());
+    public String getfuel(){
+        
         return "fuel";
     }
 
