@@ -29,7 +29,9 @@ public class Register {
     @PostMapping("/register")
     public String registerNewUser(@Valid String login, String firstName,String lastName,String email,String password){
 
-
+        long existLogin = userRepository.findAll().stream().filter(e -> e.getLogin().equalsIgnoreCase(login)).count();
+        long existEmail = userRepository.findAll().stream().filter(e -> e.getEmail().equalsIgnoreCase(email)).count();
+        if(existLogin ==0L || existEmail ==0L){
 
         User newUser = new User();
         newUser.setLogin(login);
@@ -42,7 +44,8 @@ public class Register {
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
 
-       return "index";
+        }
+       return "redirect:register";
     }
 
 }
