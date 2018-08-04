@@ -2,19 +2,29 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <style>
-        body {font-family: Arial, Helvetica, sans-serif;}
-        form {border: 3px solid #f1f1f1;}
-
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
+          .imageContainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
         }
 
+        img.avatar {
+            width: 60%;
+            border-radius: 50%;
+        }
+
+        .textLogin{
+            width: 500px;
+        }
+        .labelLogin {
+           width: 160px;
+        }
+
+        .divMargin{
+                margin: 30px 10px 12px 24px;
+        }
         button {
             background-color: #4CAF50;
             color: white;
@@ -23,6 +33,7 @@
             border: none;
             cursor: pointer;
             width: 100%;
+            align: center;
         }
 
         button:hover {
@@ -30,78 +41,118 @@
         }
 
         .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
             background-color: #f44336;
+            cursor: pointer;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            align: center;
         }
 
-        .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-        }
-
-        img.avatar {
-            width: 40%;
-            border-radius: 50%;
-        }
-
-        .container {
-            padding: 16px;
-        }
-
-        span.psw {
-            float: right;
-            padding-top: 16px;
-        }
-
-        /* Change styles for span and cancel button on extra small screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-            .cancelbtn {
-                width: 100%;
-            }
-        }
     </style>
     <title>register</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
-
+<header>
+    <object th:include="toolBar :: menu" th:remove="tag"></object>
+</header>
 <div id="error"></div>
 
-<h2>Register Form</h2>
 <form name="form" th:action="@{/register}" action="/register" method="POST">
+    <div class="container divMargin">
+    <div class="row">
+        <div class="col-8">
 
-    <div class="imgcontainer">
-        <img src="img_avatar2.png" alt="Avatar" class="avatar" style="width:150Px;height:150px">
+            <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text labelLogin" for="login"><b>login name</b></label>
+                    </div>
+                    <input class="textLogin" type="text" name="login" placeholder="Enter Your login name" id="login" required>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text labelLogin" for="firstName"><b>First Name</b></label>
+                    </div>
+                    <input class="textLogin" type="text" name="firstName" placeholder="Enter Your Username" id="firstName" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text labelLogin" for="lastName"><b>Last Name</b></label>
+                    </div>
+                    <input class="textLogin" type="text" name="lastName" placeholder="Enter Your Username" id="lastName" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text labelLogin" for="email"><b>E-mail</b></label>
+                    </div>
+                        <input class="textLogin" type="text" name="email" placeholder="Enter Your E-mail" id="email" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text labelLogin" for="password"><b>Password</b></label>
+                    </div>
+                    <input class="textLogin" type="password" name="password" placeholder="Enter Your Password" id="password" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text labelLogin" for="passwordConfirm"><b>Password Confirm</b></label>
+                    </div>
+                    <input class="textLogin" type="password" name="passwordConfirm" placeholder="Enter Your Password" id="passwordConfirm" required>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-4">
+                <div class="imageContainer">
+                    <img src="img_avatar2.png" alt="Avatar" class="avatar" style="width:150Px;height:150px">
+                </div>
+        </div>
+
+        </div>
+    <div class="row">
+        <div class="col-2">
+            <div class="row">
+
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="row">
+                <button type="submit">Register</button>
+            </div>
+            </div>
+        <div class="col-2">
+            <div class="row">
+
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="row">
+            <button type="button" class="cancelbtn">Cancel</button>
+                </div>
+        </div>
     </div>
-
-    <div class="container">
-
-        <label for="login"><b>login name</b></label>
-        <input type="text" name="login" placeholder="Enter Your login name" id="login" required>
-
-        <label for="firstName"><b>firstName</b></label>
-        <input type="text" name="firstName" placeholder="Enter Your Username" id="firstName" required>
-
-        <label for="lastName"><b>LastName</b></label>
-        <input type="text" name="lastName" placeholder="Enter Your LastName" id="lastName" required>
-
-        <label for="email"><b>E-mail</b></label>
-        <input type="text" name="email" placeholder="Enter Your E-mail" id="email" required>
-
-        <label for="password"><b>Password</b></label>
-        <input type="password" name="password" placeholder="Enter Your Password" id="password" required>
-
-        <button type="submit">Register</button>
-
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
     </div>
 </form>
 
