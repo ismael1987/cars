@@ -4,7 +4,13 @@
     <title>Brand</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <object th:include="resources :: head" th:remove="tag"></object>
-</head>
+    <style>
+        .specialLabel{
+            width: 160px;
+        }
+
+    </style>
+      </head>
 <body>
 
 <header>
@@ -17,113 +23,129 @@
 
     <form action="/addCar" method="post" enctype="multipart/form-data">
 
-     <div class="row">
-         <div class="col-2">
-        <div class="form-group">
-            <label class="sr-only" for="mileage">mileage</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">km</div>
+        <div class="row">
+            <div class="col-4">
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text specialLabel" for="mileage"><b>Mileage</b></label>
+                        </div>
+                        <input type="number" class="form-control" id="mileage" name="mileage" placeholder="mileage">
+                        <div class="input-group-append">
+                            <span class="input-group-text">km</span>
+                        </div>
+                    </div>
                 </div>
-                <input type="number" class="form-control" id="mileage" name="mileage" placeholder="mileage">
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text specialLabel" for="color"><b>Car Color</b></label>
+                        </div>
+                        <select class="custom-select" id="color" name="color">
+                            <option th:each="color : ${colors}" th:value="${color.id}" th:text="${color.description}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text specialLabel" for="color"><b>Car Brand</b></label>
+                        </div>
+                        <select class="custom-select" id="brand" name="brand" onchange="BrandDtl();">
+                            <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.brandName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text specialLabel" for="color"><b>Country</b></label>
+                    </div>
+                    <select class="custom-select" id="country" name="country">
+                        <option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.countryName}"></option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text specialLabel" for="color"><b>Date Of Registration</b></label>
+                        </div>
+                        <input type="date" name="dateOfRegistration" id="dateOfRegistration">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text specialLabel" for="color">Fuel</label>
+                        </div>
+                        <select class="custom-select" id="fuel" name="fuel">
+                            <option th:each="fuel : ${fuels}" th:value="${fuel.id}" th:text="${fuel.fueltype}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text specialLabel" for="color"><b>Car Model</b></label>
+                        </div>
+                        <select class="custom-select" id="model" name="model">
+                            <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.modelNumber}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text specialLabel" for="color"><b>States</b></label>
+                        </div>
+                        <select class="custom-select" id="state" name="state">
+                            <option th:each="state : ${states}" th:value="${state.id}" th:text="${state.stateName}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" onchange="readURL(this);" id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text specialLabel" for="color">Date Of Registration</label>
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                    </div>
+
+                </div>
             </div>
         </div>
-         </div>
-
-         <div class="col-5">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="color">Date Of Registration</label>
-            </div>
-            <input type="date" name="dateOfRegistration" id="dateOfRegistration">
-        </div>
-             </div>
-         <div class="col-3">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="color">Car Color</label>
-            </div>
-            <select class="custom-select" id="color" name="color">
-                <option th:each="color : ${colors}" th:value="${color.id}" th:text="${color.description}"></option>
-            </select>
-        </div>
-             </div>
-         <div class="col-3">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="color">Gear</label>
-            </div>
-            <select class="custom-select" id="gear" name="gear">
-                <option th:each="gear : ${gears}" th:value="${gear.id}" th:text="${gear.geartype}"></option>
-            </select>
-        </div>
-             </div>
-         <div class="col-3">
-             <div class="input-group mb-3">
-                 <div class="input-group-prepend">
-                     <label class="input-group-text" for="color">Car Brand</label>
-                 </div>
-                 <select class="custom-select" id="brand" name="brand" onchange="BrandDtl();">
-                     <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.brandName}"></option>
-                 </select>
-             </div>
-         </div>
-         <div class="col-3">
-             <div class="input-group mb-3">
-                 <div class="input-group-prepend">
-                     <label class="input-group-text" for="color">Car Model</label>
-                 </div>
-                 <select class="custom-select" id="model" name="model">
-                     <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.modelNumber}"></option>
-                 </select>
-             </div>
-         </div>
-
-         <div class="col-3">
-             <div class="input-group mb-3">
-                 <div class="input-group-prepend">
-                     <label class="input-group-text" for="color">Country</label>
-                 </div>
-                 <select class="custom-select" id="country" name="country">
-                     <option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.countryName}"></option>
-                 </select>
-             </div>
-         </div>
-
-         <div class="col-3">
-             <div class="input-group mb-3">
-                 <div class="input-group-prepend">
-                     <label class="input-group-text" for="color">States</label>
-                 </div>
-                 <select class="custom-select" id="state" name="state">
-                     <option th:each="state : ${states}" th:value="${state.id}" th:text="${state.stateName}"></option>
-                 </select>
-             </div>
-         </div>
-
-         <div class="col-3">
-             <div class="input-group mb-3">
-                 <div class="input-group-prepend">
-                     <label class="input-group-text" for="color">Fuel</label>
-                 </div>
-                 <select class="custom-select" id="fuel" name="fuel">
-                     <option th:each="fuel : ${fuels}" th:value="${fuel.id}" th:text="${fuel.fueltype}"></option>
-                 </select>
-             </div>
-         </div>
-
-         <div class="col-3">
-             <div class="input-group mb-3">
-                     <input type="file" name="pic" accept="image/*">
-             </div>
-         </div>
-
-     </div>
 
         <button class="btn btn-primary" type="submit">Add Car To Buy</button>
     </form>
 
 </main>
 
+
+
 </body>
 </html>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            console.log("test");
+        }
+    }
+</script>
