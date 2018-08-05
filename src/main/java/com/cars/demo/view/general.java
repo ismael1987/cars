@@ -1,9 +1,11 @@
 package com.cars.demo.view;
 
 import com.cars.demo.model.Color;
+import com.cars.demo.model.Fuel;
 import com.cars.demo.model.Modell;
 import com.cars.demo.model.State;
 import com.cars.demo.repository.ColorRepository;
+import com.cars.demo.repository.FuelRepository;
 import com.cars.demo.repository.ModelRepository;
 import com.cars.demo.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class general {
 
     @Autowired
     ColorRepository colorRepository;
+
+    @Autowired
+    FuelRepository fuelRepository;
 
     @GetMapping("getState")
     List<State> getState(@Valid Long country){
@@ -52,6 +57,20 @@ public class general {
             return  color;
         }
 
+    }
+
+    @GetMapping("getFuel")
+    Fuel getFuel(@Valid Fuel fuel){
+        System.err.println(fuel.getFueltype());
+        System.err.println("somthing error");
+        Optional<Fuel> firstFuel = fuelRepository.findAll().stream().filter(e -> e.getFueltype().equals(fuel.getFueltype())).findFirst();
+        if (firstFuel.isPresent())
+            return firstFuel.get();
+        else {
+            Fuel fuel2 = new Fuel();
+            fuel2.setFueltype("NoFuel");
+            return fuel2;
+        }
     }
 
 
