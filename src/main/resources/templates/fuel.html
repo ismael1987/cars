@@ -4,7 +4,6 @@
     <object th:include="resources ::head" th:remove="tag"></object>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-
     <title>fuel</title>
 </head>
 <body>
@@ -19,7 +18,7 @@
     <form action="/fuel" method="post">
 
         <div class="form-group">
-            <input class="form-control" name="fuel" placeholder="fuel"  type="text" required/>
+            <input class="form-control" name="fuel" id="fuel" placeholder="fuel"  type="text" />
         </div>
         <button class="btn btn-primary" type="submit">Add</button>
     </form>
@@ -44,7 +43,8 @@
         }
 
         let parameters = { id :-1 , fueltype: $("#fuel").val()};
-        $.getJSON({ url: "/getFuel", type: 'GET', async: false}, parameters , function(data) {
+
+          $.getJSON({ url: "/getFuel", type: 'GET', async: false}, parameters , function(data) {
             if (data.fueltype != "NoFuel"){
                 error += " This Fuel "+$("#fuel").val()+" is already Exists";}
         }) ;
@@ -53,13 +53,7 @@
         if (error != "") {
             $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
         }
-        if (error != ""){
             return false;
-        }
-        else
-        {
-            return true;
-        }
 
     })
 
