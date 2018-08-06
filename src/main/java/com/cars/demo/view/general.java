@@ -1,16 +1,9 @@
 package com.cars.demo.view;
 
-import com.cars.demo.model.Color;
-import com.cars.demo.model.Fuel;
-import com.cars.demo.model.Modell;
-import com.cars.demo.model.State;
-import com.cars.demo.repository.ColorRepository;
-import com.cars.demo.repository.FuelRepository;
-import com.cars.demo.repository.ModelRepository;
-import com.cars.demo.repository.StateRepository;
+import com.cars.demo.model.*;
+import com.cars.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -32,6 +25,9 @@ public class general {
 
     @Autowired
     FuelRepository fuelRepository;
+
+    @Autowired
+    GearRepository gearRepository;
 
     @GetMapping("getState")
     List<State> getState(@Valid Long country){
@@ -59,7 +55,7 @@ public class general {
 
     }
 
-    @GetMapping("getFuel")
+    @GetMapping("/getFuel")
     Fuel getFuel(@Valid Fuel fuel){
         System.err.println(fuel.getFueltype());
         System.err.println("somthing error");
@@ -73,5 +69,20 @@ public class general {
         }
     }
 
+    @GetMapping("/getGear")
+    Gear getGear(@Valid Gear gear){
+        System.err.println(gear.getGeartype());
+        System.err.println("somthing error");
+        Optional<Gear> firstgear = gearRepository.findAll().stream().filter(e -> e.getGeartype().equals(gear.getGeartype())).findFirst();
+        if(firstgear.isPresent())
+            return firstgear.get();
+
+        else {
+            Gear gear2 = new Gear();
+            gear2.setGeartype("NoGear");
+            return gear2;
+        }
+
+    }
 
 }
