@@ -29,6 +29,9 @@ public class general {
     @Autowired
     GearRepository gearRepository;
 
+    @Autowired
+    BrandRepository brandRepository;
+
     @GetMapping("getState")
     List<State> getState(@Valid Long country){
 
@@ -73,9 +76,9 @@ public class general {
     Gear getGear(@Valid Gear gear1){
         System.err.println(gear1.getGeartype());
         System.err.println("somthing error");
-        Optional<Gear> firstgear = gearRepository.findAll().stream().filter(e -> e.getGeartype().equals(gear1.getGeartype())).findFirst();
-        if(firstgear.isPresent())
-            return firstgear.get();
+        Optional<Gear> firstGear = gearRepository.findAll().stream().filter(e -> e.getGeartype().equals(gear1.getGeartype())).findFirst();
+        if(firstGear.isPresent())
+            return firstGear.get();
 
         else {
             Gear gear2 = new Gear();
@@ -83,6 +86,22 @@ public class general {
             return gear2;
         }
 
+    }
+
+    @GetMapping("/getBrand")
+    Brand getBrand(@Valid Brand brand1){
+        System.err.println(brand1.getBrandName());
+        System.err.println("somthing error");
+        Optional<Brand> firstBrand = brandRepository.findAll().stream().filter(e ->e.getBrandName().equals(brand1.getBrandName())).findFirst();
+
+
+        if(firstBrand.isPresent())
+            return firstBrand.get();
+        else {
+            Brand brand2 = new Brand();
+            brand2.setBrandName("NoBrand");
+            return brand2;
+        }
     }
 
 }
