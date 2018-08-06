@@ -70,10 +70,10 @@ public class general {
     }
 
     @GetMapping("/getGear")
-    Gear getGear(@Valid Gear gear){
-        System.err.println(gear.getGeartype());
+    Gear getGear(@Valid Gear gear1){
+        System.err.println(gear1.getGeartype());
         System.err.println("somthing error");
-        Optional<Gear> firstgear = gearRepository.findAll().stream().filter(e -> e.getGeartype().equals(gear.getGeartype())).findFirst();
+        Optional<Gear> firstgear = gearRepository.findAll().stream().filter(e -> e.getGeartype().equals(gear1.getGeartype())).findFirst();
         if(firstgear.isPresent())
             return firstgear.get();
 

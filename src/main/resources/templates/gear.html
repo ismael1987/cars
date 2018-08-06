@@ -3,6 +3,8 @@
 <head>
 <object th:include="resources :: head" th:remove="tag"></object>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
     <title>gear</title>
 
 </head>
@@ -34,5 +36,30 @@
     </table>
 
 </main>
+
+<script type="text/javascript">
+    $("form").submit(function(e){
+        var error = "";
+        if ($("#gear").val() == ""){
+            error += "The fuel  field is required.<br>"
+        }
+        let parameters = { id :-1 , fueltype: $("#gear").val()};
+
+        if ($("#gear").val() != ""){
+            $.getJSON({ url: "/getGear", type: 'GET', async: false}, parameters , function(data) {
+                if (data.geartype != "NoFGear"){
+                    error += " This Gear "+$("#gear").val()+" is already Exists";}
+            }) ;
+        }
+
+        if (error != "") {
+            $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
+        }
+        return false;
+
+    })
+
+</script>
+
 </body>
 </html>
