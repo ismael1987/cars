@@ -74,12 +74,11 @@ public class general {
 
     @GetMapping("/getGear")
     Gear getGear(@Valid Gear gear1){
-        System.err.println(gear1.getGeartype());
-        System.err.println("somthing error");
         Optional<Gear> firstGear = gearRepository.findAll().stream().filter(e -> e.getGeartype().equals(gear1.getGeartype())).findFirst();
-        if(firstGear.isPresent())
+        if(firstGear.isPresent()) {
+            System.err.println("Here");
             return firstGear.get();
-
+        }
         else {
             Gear gear2 = new Gear();
             gear2.setGeartype("NoGear");

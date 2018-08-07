@@ -67,7 +67,7 @@ public class ApplicationInitialiser {
             colorRepository.findAll().stream().forEach(color -> color.toString());
 
             gearRepository.deleteAll();
-            String theyGearType ="Manual ,Automatic ,Semi automatic ";
+            String theyGearType ="Manual,Automatic,Semi automatic";
 
             Arrays.stream(theyGearType.split(",")).collect(Collectors.toList()).stream().map(e-> new Gear(e)).forEach(gear -> gearRepository.save(gear));
 

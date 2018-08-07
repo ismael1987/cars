@@ -48,11 +48,12 @@
               }
 
               let parameters = { id :-1 , description: $("#color").val()};
-              $.getJSON({ url: "/getColor", type: 'GET', async: false}, parameters , function(data) {
-               if (data.description != "NoColor"){
-                    error += " This Color "+$("#color").val()+" is already Exists";}
-              }) ;
-
+                if ($("#color").val() != ""){
+                    $.getJSON({ url: "/getColor", type: 'GET', async: false}, parameters , function(data) {
+                    if (data.description != "NoColor"){
+                        error += " This Color "+$("#color").val()+" is already Exists";}
+                    }) ;
+              }
 
               if (error != "") {
                     $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
