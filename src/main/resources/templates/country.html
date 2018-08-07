@@ -18,7 +18,7 @@
     <form action="/country" method="post">
 
         <div class="form-group">
-            <input class="form-control" name="country" placeholder="country"  type="text" required/>
+            <input class="form-control" name="country" id="country" placeholder="country"  type="text" required/>
         </div>
         <button class="btn btn-primary" type="submit">Add</button>
     </form>
@@ -34,6 +34,36 @@
     </table>
 
 </main>
+
+<script type="text/javascript">
+    $("form").submit(function(e){
+        var error = "";
+        if ($("#country").val() == ""){
+            error += "The country  field is required.<br>"
+        }
+        let parameters = { id :-1 , countryName: $("#country").val()};
+
+        if ($("#country").val() != ""){
+            $.getJSON({ url: "/getCountry", type: 'GET', async: false}, parameters , function(data) {
+                if (data.countryName != "NoGear"){
+                    error += " This Country "+$("#country").val()+" is already Exists";}
+            }) ;
+        }
+
+        if (error != "") {
+            $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
+        }
+        if (error == "" ){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+
+    })
+
+</script>
 
 </body>
 </html>
