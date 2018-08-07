@@ -21,7 +21,7 @@
     <form action="/brand" method="post">
 
         <div class="form-group">
-            <input class="form-control" name="brand" placeholder="brand"  type="text" required/>
+            <input class="form-control" name="brand" id ="brand" placeholder="brand"  type="text" required/>
         </div>
         <button class="btn btn-primary" type="submit">Add</button>
     </form>
@@ -57,8 +57,13 @@
         if (error != "") {
             $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
         }
-        return false;
 
+        if (error == "" ){
+            return true;
+        }
+        else{
+            return false;
+        }
     })
 
 </script>

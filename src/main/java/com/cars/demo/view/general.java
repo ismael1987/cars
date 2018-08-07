@@ -32,6 +32,9 @@ public class general {
     @Autowired
     BrandRepository brandRepository;
 
+    @Autowired
+    CountryRepository countryRepository;
+
     @GetMapping("getState")
     List<State> getState(@Valid Long country){
 
@@ -93,7 +96,6 @@ public class general {
         System.err.println("somthing error");
         Optional<Brand> firstBrand = brandRepository.findAll().stream().filter(e ->e.getBrandName().equals(brand1.getBrandName())).findFirst();
 
-
         if(firstBrand.isPresent())
             return firstBrand.get();
         else {
@@ -101,6 +103,21 @@ public class general {
             brand2.setBrandName("NoBrand");
             return brand2;
         }
+    }
+
+    @GetMapping("/getCountry")
+    Country getCountry(@Valid Country country1){
+       System.err.println(country1.getCountryName());
+       System.err.println("somthing error");
+       Optional<Country> firstCountry = countryRepository.findAll().stream().filter(e ->e.getCountryName().equals(country1.getCountryName())).findFirst();
+
+       if(firstCountry.isPresent())
+           return firstCountry.get();
+       else {
+           Country country2 = new Country();
+           country2.setCountryName("NoCountry");
+           return country2;
+       }
     }
 
 }
