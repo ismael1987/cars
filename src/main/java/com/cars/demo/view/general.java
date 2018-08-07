@@ -35,11 +35,11 @@ public class general {
     @Autowired
     CountryRepository countryRepository;
 
-    @GetMapping("getState")
-    List<State> getState(@Valid Long country){
+    //@GetMapping("getState")
+   // List<State> getState(@Valid Long country){
 
-        return stateRepository.findAll().stream().filter(state -> state.getCountry().getId().equals(country)).collect(Collectors.toList()) ;
-    }
+      //  return stateRepository.findAll().stream().filter(state -> state.getCountry().getId().equals(country)).collect(Collectors.toList()) ;
+    //}
 
     @GetMapping("getmodel")
     List<Modell> getmodel(@Valid Long brand){
@@ -119,5 +119,22 @@ public class general {
            return country2;
        }
     }
+
+    @GetMapping("/getState")
+    State getState(@Valid State state1 ){
+        System.err.println(state1.getStateName());
+        System.err.println("somthing error");
+        Optional<State> firstState = stateRepository.findAll().stream().filter(e ->e.getStateName().equals(state1.getStateName())).findFirst();
+
+        if(firstState.isPresent())
+            return firstState.get();
+        else {
+            State state2 = new State();
+            state2.setStateName("NoState");
+            return state2;
+        }
+    }
+
+
 
 }
