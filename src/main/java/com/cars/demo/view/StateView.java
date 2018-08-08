@@ -51,7 +51,8 @@ public class StateView {
             state.setCountry(countryFind.get());
             stateRepository.save(state);
         }
-        return "index";
+
+        return "redirect:state";
     }
 
 

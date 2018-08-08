@@ -23,7 +23,7 @@ function StateDtl()
             htmltag +="</tr>";
         }
         htmltag +="</table>";
-        document.getElementById("datadiv").innerHTML = htmltag;
+        document.getElementById("dataDiv").innerHTML = htmltag;
 
     });
 

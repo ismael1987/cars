@@ -1,9 +1,7 @@
 package com.cars.demo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class State {
@@ -12,6 +10,8 @@ public class State {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false ,  unique = true)
+    @NotBlank
     private String stateName;
 
     @ManyToOne

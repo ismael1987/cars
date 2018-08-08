@@ -35,11 +35,11 @@ public class general {
     @Autowired
     CountryRepository countryRepository;
 
-    //@GetMapping("getState")
-   // List<State> getState(@Valid Long country){
+    @GetMapping("getState")
+   List<State> getState(@Valid Long country){
 
-      //  return stateRepository.findAll().stream().filter(state -> state.getCountry().getId().equals(country)).collect(Collectors.toList()) ;
-    //}
+        return stateRepository.findAll().stream().filter(state -> state.getCountry().getId().equals(country)).collect(Collectors.toList()) ;
+    }
 
     @GetMapping("getmodel")
     List<Modell> getmodel(@Valid Long brand){
@@ -120,21 +120,26 @@ public class general {
        }
     }
 
-    @GetMapping("/getState")
-    State getState(@Valid State state1 ){
-        System.err.println(state1.getStateName());
-        System.err.println("somthing error");
-        Optional<State> firstState = stateRepository.findAll().stream().filter(e ->e.getStateName().equals(state1.getStateName())).findFirst();
+    @GetMapping("/checkState")
+    State checkState(@Valid String  stateName , @Valid String countryNo) {
+        System.err.println(stateName);
+        System.err.println(countryNo);
 
-        if(firstState.isPresent())
-            return firstState.get();
-        else {
-            State state2 = new State();
-            state2.setStateName("NoState");
-            return state2;
+        Optional<State> firstState = stateRepository.findAll().stream()
+                .filter(e -> e.getStateName().equalsIgnoreCase(stateName))
+                .filter(e -> e.getCountry().getId().equals(Long.parseLong(countryNo)))
+                .findFirst();
+        if (firstState.isPresent())
+        {
+            State state = new State();
+            state.setStateName("Found");
+            return state;
         }
+        else {
+            State state = new State();
+            state.setStateName("notFound");
+            return state;
+        }
+
     }
-
-
-
 }

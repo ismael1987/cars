@@ -9,11 +9,8 @@
 <header>
     <object th:include="toolBar :: menu" th:remove="tag"></object>
 </header>
-
+<div id="error"></div>
 <main class="container p-5">
-
-
-
         <div class="form-group">
             <form action="/state" method="post">
             <input class="form-control" autofocus name="stateName" id="stateName" placeholder="stateName"  type="text"/>
@@ -26,35 +23,36 @@
             </form>
         </div>
     <br>
-    <div id="datadiv"></div>
+    <div id="dataDiv"></div>
 
     <script type="text/javascript">
         $("form").submit(function(e) {
             var error = "";
-            if ($("#state").val() == "") {
+            if ($("#stateName").val() == "") {
                 error += "The state  field is required.<br>"
             }
 
-            let parameters = { id :-1 , stateName: $("#state").val()};
 
-            if ($("#state").val() != ""){
-                $.getJSON({ url: "/getState", type: 'GET', async: false}, parameters , function(data) {
-                    if (data.stateName != "NoState"){
-                        error += " This State "+$("#state").val()+" is already Exists";}
+            let parameters  = { stateName: $("#stateName").val(), countryNo: $("#country").val()};
+
+
+
+            if ($("#stateName").val() != ""){
+                $.getJSON({ url: "/checkState", type: 'GET', async: false}, parameters , function(data) {
+                    if (data.stateName == "Found"){
+                        error += " This State "+$("#stateName").val()+" is already Exists";}
                 }) ;
             }
 
             if (error != "") {
                 $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
-            }
-
-            if (error == "" ){
-                return true;
-            }
-            else{
                 return false;
             }
-        })
+            else{
+                return true;
+            }
+
+           })
 
     </script>
 
