@@ -5,6 +5,7 @@ import com.cars.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -27,7 +28,7 @@ public class Register {
     }
 
     @PostMapping("/register")
-    public String registerNewUser(@Valid String login, String firstName,String lastName,String email,String password){
+    public String registerNewUser(@Valid String login, String firstName,String lastName,String email,String password,String confirmPassword,Errors errors ){
 
         long existLogin = userRepository.findAll().stream().filter(e -> e.getLogin().equalsIgnoreCase(login)).count();
         long existEmail = userRepository.findAll().stream().filter(e -> e.getEmail().equalsIgnoreCase(email)).count();
@@ -39,6 +40,13 @@ public class Register {
         newUser.setLastName(lastName);
         newUser.setEmail(email);
         newUser.setPassword(new BCryptPasswordEncoder().encode(password));
+        newUser.setConfirmPassword(new BCryptPasswordEncoder().encode(confirmPassword));
+            //if (!errors.hasErrors()) {
+               // if (!newUser.getConfirmPassword().equals(newUser.getPassword())) {
+                  //  errors.rejectValue("confirmPassword", "Match.appUserForm.confirmPassword");
+               // }
+            //}
+
         Set<String> authorities= new HashSet<>();
         authorities.add("user");
         newUser.setAuthorities(authorities);
