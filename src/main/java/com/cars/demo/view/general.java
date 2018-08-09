@@ -142,4 +142,29 @@ public class general {
         }
 
     }
+
+    @GetMapping("/checkModel")
+    Modell checkModel(@Valid String  modelNumber , @Valid String brandNo) {
+        System.err.println(modelNumber);
+        System.err.println(brandNo);
+
+        Optional<Modell> firstModell = modelRepository.findAll().stream()
+                .filter(e -> e.getModelNumber().equalsIgnoreCase(modelNumber))
+                .filter(e -> e.getBrand().getId().equals(Long.parseLong(brandNo)))
+                .findFirst();
+        if (firstModell.isPresent())
+        {
+            Modell modell = new Modell();
+            modell.setModelNumber("Found");
+            return modell;
+        }
+        else {
+            Modell modell = new Modell();
+            modell.setModelNumber("notFound");
+            return modell;
+        }
+
+    }
+
+
 }
