@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <object th:include="resources :: head" th:remove="tag"></object>
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 
@@ -73,7 +75,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text labelLogin" for="login"><b>login name</b></label>
                     </div>
-                    <input class="textLogin" type="text" name="login" placeholder="Enter Your login name" id="login" required>
+                    <input class="textLogin" type="text" name="login" id="login" placeholder="Enter Your login name" >
                 </div>
             </div>
 
@@ -83,7 +85,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text labelLogin" for="firstName"><b>First Name</b></label>
                     </div>
-                    <input class="textLogin" type="text" name="firstName" placeholder="Enter Your Username" id="firstName" required>
+                    <input class="textLogin" type="text" name="firstName" id="firstName" placeholder="Enter Your Username"  >
                 </div>
             </div>
 
@@ -92,7 +94,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text labelLogin" for="lastName"><b>Last Name</b></label>
                     </div>
-                    <input class="textLogin" type="text" name="lastName" placeholder="Enter Your Username" id="lastName" required>
+                    <input class="textLogin" type="text" name="lastName" placeholder="Enter Your Username" id="lastName" >
                 </div>
             </div>
 
@@ -101,7 +103,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text labelLogin" for="email"><b>E-mail</b></label>
                     </div>
-                        <input class="textLogin" type="text" name="email" placeholder="Enter Your E-mail" id="email" required>
+                        <input class="textLogin" type="text" name="email" placeholder="Enter Your E-mail" id="email" >
                 </div>
             </div>
 
@@ -110,7 +112,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text labelLogin" for="password"><b>Password</b></label>
                     </div>
-                    <input class="textLogin" type="password" name="password" placeholder="Enter Your Password" id="password" required>
+                    <input class="textLogin" type="password" name="password" placeholder="Enter Your Password" id="password" >
                 </div>
             </div>
 
@@ -119,7 +121,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text labelLogin" for="passwordConfirm"><b>Password Confirm</b></label>
                     </div>
-                    <input class="textLogin" type="password" name="passwordConfirm" placeholder="Enter Your Password" id="passwordConfirm" required>
+                    <input class="textLogin" type="password" name="passwordConfirm" placeholder="Enter Your Password" id="passwordConfirm" >
                 </div>
             </div>
 
@@ -158,6 +160,52 @@
     </div>
 </form>
 
+<script type="text/javascript">
+        $("form").submit(function(e) {
+            var error = "";
+            if ($("#login").val() == "") {
+                error += "The Login field is required.<br>"
+            }
+            if ($("#firstName").val() == "") {
+                error += "The First Name field is required.<br>"
+            }
+            if ($("#lastName").val() == "") {
+                error += "The Last Name field is required.<br>"
+            }
 
+            if ($("#email").val() == "") {
+                error += "The Email field is required.<br>"
+            }
+
+            if ($("#password").val() == "") {
+                error += "The Password field is required.<br>"
+            }
+
+            if ($("#passwordConfirm").val() == "") {
+                error += "The Password Confirm field is required.<br>"
+            }
+
+             if ($("#passwordConfirm").val() != $("#password").val()) {
+                error += "The Password and The Confirm doesn't match.<br>"
+            }
+            if (!isValidEmailAddress($("#email").val())) {
+                error += "The Email doesn't correct.<br>"
+            }
+
+            if (error != "") {
+                $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
+                return false;
+            }
+            else{
+                return false;
+            }
+
+           });
+
+           function isValidEmailAddress(emailAddress) {
+                var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
+                return pattern.test(emailAddress);
+           };
+</script>
 </body>
 </html>
