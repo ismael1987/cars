@@ -28,32 +28,30 @@ public class Register {
     }
 
     @PostMapping("/register")
-    public String registerNewUser(@Valid String login, String firstName,String lastName,String email,String password,String confirmPassword,Errors errors ){
+    public String registerNewUser(@Valid String login, String firstName,String lastName,String email,String password,String passwordConfirm ){
 
+        System.err.println(passwordConfirm);
+        System.err.println(password);
+        if ((!passwordConfirm.equalsIgnoreCase(password))){
+            System.err.println("Error");
+            return "redirect:error";
+        }
         long existLogin = userRepository.findAll().stream().filter(e -> e.getLogin().equalsIgnoreCase(login)).count();
         long existEmail = userRepository.findAll().stream().filter(e -> e.getEmail().equalsIgnoreCase(email)).count();
-        if(existLogin ==0L || existEmail ==0L){
+        if( existLogin == 0L || existEmail == 0L ){
+            User newUser = new User();
+            newUser.setLogin(login);
+            newUser.setFirstName(firstName);
+            newUser.setLastName(lastName);
+            newUser.setEmail(email);
+            newUser.setPassword(new BCryptPasswordEncoder().encode(password));
 
-        User newUser = new User();
-        newUser.setLogin(login);
-        newUser.setFirstName(firstName);
-        newUser.setLastName(lastName);
-        newUser.setEmail(email);
-        newUser.setPassword(new BCryptPasswordEncoder().encode(password));
-        newUser.setConfirmPassword(new BCryptPasswordEncoder().encode(confirmPassword));
-            //if (!errors.hasErrors()) {
-               // if (!newUser.getConfirmPassword().equals(newUser.getPassword())) {
-                  //  errors.rejectValue("confirmPassword", "Match.appUserForm.confirmPassword");
-               // }
-            //}
-
-        Set<String> authorities= new HashSet<>();
-        authorities.add("user");
-        newUser.setAuthorities(authorities);
-        userRepository.save(newUser);
-
+            Set<String> authorities= new HashSet<>();
+            authorities.add("user");
+            newUser.setAuthorities(authorities);
+            userRepository.save(newUser);
         }
-       return "redirect:register";
+            return "redirect:register";
     }
 
 }
