@@ -35,6 +35,9 @@ public class general {
     @Autowired
     CountryRepository countryRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping("getState")
    List<State> getState(@Valid Long country){
 
@@ -58,7 +61,6 @@ public class general {
             color.setDescription("NoColor");
             return  color;
         }
-
     }
 
     @GetMapping("/getFuel")
@@ -87,7 +89,6 @@ public class general {
             gear2.setGeartype("NoGear");
             return gear2;
         }
-
     }
 
     @GetMapping("/getBrand")
@@ -140,7 +141,6 @@ public class general {
             state.setStateName("notFound");
             return state;
         }
-
     }
 
     @GetMapping("/checkModel")
@@ -163,7 +163,20 @@ public class general {
             modell.setModelNumber("notFound");
             return modell;
         }
+    }
 
+    @GetMapping("/checkEmail")
+    User checkEmail(@Valid User email1){
+      Optional<User> firstEmail = userRepository.findAll().stream().filter(e ->e.getEmail().equals(email1.getEmail())).findFirst();
+      if (firstEmail.isPresent()){
+            return firstEmail.get();
+        }
+      else {
+
+            User user2 = new User();
+            user2.setEmail("NoEmail");
+            return user2;
+        }
     }
 
 

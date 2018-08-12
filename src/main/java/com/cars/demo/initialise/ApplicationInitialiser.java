@@ -20,8 +20,6 @@ import java.util.stream.Stream;
 @Configuration
 public class ApplicationInitialiser {
 
-    @Autowired
-    StateRepository stateRepository;
 
     @Autowired
     CountryRepository countryRepository;
@@ -33,7 +31,7 @@ public class ApplicationInitialiser {
     UserRepository userRepository;
 
     @Bean
-    ApplicationRunner  intialiseData(ColorRepository colorRepository, GearRepository gearRepository, StateRepository stateRepository){
+    ApplicationRunner  intialiseData(ColorRepository colorRepository, GearRepository gearRepository ){
         return  args -> {
 
             User user = new User();

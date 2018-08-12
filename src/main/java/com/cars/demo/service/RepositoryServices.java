@@ -25,6 +25,9 @@ public class RepositoryServices {
     @Autowired
     private CountryRepository countryRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
 
 
     public List<Fuel> getAllFuel(){
@@ -42,6 +45,11 @@ public class RepositoryServices {
     public List<Country> getAllcountry(){
         return countryRepository.findAll().stream().collect(Collectors.toList());
     }
+
+    public List<User> getAlluser(){
+        return userRepository.findAll().stream().collect(Collectors.toList());
+    }
+
 
 
 }
