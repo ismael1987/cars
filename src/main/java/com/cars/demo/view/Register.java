@@ -56,7 +56,7 @@ public class Register {
         {
                   return "redirect:error";
         }
-            return "redirect:register";
+            return "redirect:index";
     }
 
 }

@@ -167,7 +167,10 @@ public class general {
 
     @GetMapping("/checkEmail")
     User checkEmail(@Valid User email1){
-      Optional<User> firstEmail = userRepository.findAll().stream().filter(e ->e.getEmail().equals(email1.getEmail())).findFirst();
+        System.err.println(email1);
+        System.err.println("somthing error");
+
+        Optional<User> firstEmail = userRepository.findAll().stream().filter(e ->e.getEmail().equals(email1.getEmail())).findFirst();
       if (firstEmail.isPresent()){
             return firstEmail.get();
         }

@@ -192,6 +192,14 @@
                 error += "The Email doesn't correct.<br>"
             }
 
+            let parameters = { id :-1 , email: $("#email").val()};
+            if ($("#email").val() != ""){
+                $.getJSON({ url: "/checkEmail", type: 'GET', async: false}, parameters , function(data) {
+                    if (data.email != "NoEmail"){
+                        error += " This Email "+$("#email").val()+" is already Exists";}
+                }) ;
+            }
+
             if (error != "") {
                 $("#error").html('<div class="alert alert-danger" role="alert"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>');
                 return false;
@@ -199,6 +207,7 @@
             else{
                 return true;
             }
+
 
            });
 
