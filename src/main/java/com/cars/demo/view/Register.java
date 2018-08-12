@@ -2,6 +2,7 @@ package com.cars.demo.view;
 
 import com.cars.demo.model.User;
 import com.cars.demo.repository.UserRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
+import org.slf4j.Logger;
 
 @Controller
 public class Register {
+
+    private final Logger log = LoggerFactory.getLogger(Register.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -29,11 +33,8 @@ public class Register {
 
     @PostMapping("/register")
     public String registerNewUser(@Valid String login, String firstName,String lastName,String email,String password,String passwordConfirm ){
-
-        System.err.println(passwordConfirm);
-        System.err.println(password);
-        if ((!passwordConfirm.equalsIgnoreCase(password))){
-            System.err.println("Error");
+        log.info("Register New User: {}",firstName);
+        if ((!passwordConfirm.equals(password))){
             return "redirect:error";
         }
         long existLogin = userRepository.findAll().stream().filter(e -> e.getLogin().equalsIgnoreCase(login)).count();
@@ -50,6 +51,10 @@ public class Register {
             authorities.add("user");
             newUser.setAuthorities(authorities);
             userRepository.save(newUser);
+        }
+        else
+        {
+                  return "redirect:error";
         }
             return "redirect:register";
     }

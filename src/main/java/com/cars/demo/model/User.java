@@ -37,9 +37,6 @@ public class User {
     @Size(min=1,max = 255)
     private String password;
 
-    @Column(nullable = false)
-    @Size(min=1,max = 255)
-    String confirmPassword;
 
     @Email
     @Size(min = 5, max = 100)
@@ -69,14 +66,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public void setAuthorities(Set<String> authorities) {
