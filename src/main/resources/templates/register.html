@@ -192,10 +192,12 @@
                 error += "The Email doesn't correct.<br>"
             }
 
-            let parameters = { id :-1 , email: $("#email").val()};
+
             if ($("#email").val() != ""){
+                let parameters = { id :-1 , login : 'NoLogin' ,email: $("#email").val()};
                 $.getJSON({ url: "/checkEmail", type: 'GET', async: false}, parameters , function(data) {
-                    if (data.email != "NoEmail"){
+                    console.log("Test");
+                    if (data.id  != -1){
                         error += " This Email "+$("#email").val()+" is already Exists";}
                 }) ;
             }
@@ -205,7 +207,7 @@
                 return false;
             }
             else{
-                return true;
+                return false;
             }
 
 

@@ -2,8 +2,11 @@ package com.cars.demo.view;
 
 import com.cars.demo.model.*;
 import com.cars.demo.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -14,6 +17,9 @@ import java.util.stream.Collectors;
 
 @RestController
 public class general {
+
+
+    private final Logger log = LoggerFactory.getLogger(Register.class);
 
     @Autowired
     StateRepository stateRepository;
@@ -166,17 +172,17 @@ public class general {
     }
 
     @GetMapping("/checkEmail")
-    User checkEmail(@Valid User email1){
-        System.err.println(email1);
-        System.err.println("somthing error");
-
-        Optional<User> firstEmail = userRepository.findAll().stream().filter(e ->e.getEmail().equals(email1.getEmail())).findFirst();
-      if (firstEmail.isPresent()){
+    User checkEmail(@Valid User user1){
+        log.info("check if Email is Exists  : {}",user1.getEmail());
+        Optional<User> firstEmail = userRepository.findAll().stream().filter(e ->e.getEmail().equals(user1.getEmail())).findFirst();
+        if (firstEmail.isPresent()){
+            log.info("this Email is Exists  : {}",user1.getEmail());
             return firstEmail.get();
         }
-      else {
-
+        else {
+            log.info("this Email doesn't  Exists  : {}",user1.getEmail());
             User user2 = new User();
+            user2.setId(-1L);
             user2.setEmail("NoEmail");
             return user2;
         }
