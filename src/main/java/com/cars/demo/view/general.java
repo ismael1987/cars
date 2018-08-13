@@ -188,5 +188,21 @@ public class general {
         }
     }
 
+    @GetMapping("/checkLogin")
+    User checkLogin(@Valid User user2){
+        log.info("check if Login is Exists  : {}",user2.getLogin());
+        Optional<User> firstLogin= userRepository.findAll().stream().filter(e ->e.getLogin().equals(user2.getLogin())).findFirst();
+        if (firstLogin.isPresent()){
+            log.info("this Login is Exists  : {}",user2.getLogin());
+            return firstLogin.get();
+        }
+        else {
+            log.info("this Email doesn't  Exists  : {}",user2.getLogin());
+            User user3 = new User();
+            user3.setId(-1L);
+            user3.setEmail("NoEmail");
+            return user3;
+        }
+    }
 
 }
