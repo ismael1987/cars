@@ -166,6 +166,14 @@
             if ($("#login").val() == "") {
                 error += "The Login field is required.<br>"
             }
+            if ($("#login").val() != ""){
+                let parameters = { id :-1 , login : 'NoLogin' ,login: $("#login").val()};
+                $.getJSON({ url: "/checkLogin", type: 'GET', async: false}, parameters , function(data) {
+                    console.log("Test");
+                    if (data.id  != -1){
+                        error += " This Login "+$("#login").val()+" is already Exists";}
+                }) ;
+            }
             if ($("#firstName").val() == "") {
                 error += "The First Name field is required.<br>"
             }
