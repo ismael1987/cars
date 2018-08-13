@@ -50,6 +50,6 @@ public class ModelView {
             modell.setBrand(brandfind.get());
             modelRepository.save(modell);
         }
-        return "index";
+        return "redirect:model";
     }
 }

@@ -32,11 +32,7 @@
             if ($("#stateName").val() == "") {
                 error += "The state  field is required.<br>"
             }
-
-
             let parameters  = { stateName: $("#stateName").val(), countryNo: $("#country").val()};
-
-
 
             if ($("#stateName").val() != ""){
                 $.getJSON({ url: "/checkState", type: 'GET', async: false}, parameters , function(data) {

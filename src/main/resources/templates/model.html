@@ -3,7 +3,7 @@
 <head>
     <title>Model</title>
     <object th:include="resources :: head" th:remove="tag"></object>
-    <script src="countryScript.js"></script>
+    <script src="brandScript.js"></script>
 </head>
 <body onload="BrandDtl();">
 <header>
@@ -13,14 +13,14 @@
 <main class="container p-5">
     <div class="form-group">
         <form action="/model" method="post">
-            <input class="form-control" autofocus name="modelNumber" placeholder="modelNumber"  type="text"/>
+            <input class="form-control" autofocus name="modelNumber" id="modelNumber" placeholder="modelNumber"  type="text"/>
 
             <select autocomplete="off"  class="form-control" id="brand" name="brand"   onchange="BrandDtl();">
                 <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.brandName}"></option>
             </select>
+
                 <button class="btn btn-primary" type="submit">Add</button>
-            <!--<button class="btn btn-primary" type="submit">Add</button>
-            -->
+
         </form>
     </div>
     <br>
@@ -32,15 +32,11 @@
             if ($("#modelNumber").val() == "") {
                 error += "The model  field is required.<br>"
             }
-
-
             let parameters  = { modelNumber: $("#modelNumber").val(), brandNo: $("#brand").val()};
-
-
 
             if ($("#modelNumber").val() != ""){
                 $.getJSON({ url: "/checkModel", type: 'GET', async: false}, parameters , function(data) {
-                    if (data.stateName == "Found"){
+                    if (data.modelNumber == "Found"){
                         error += " This Model "+$("#modelNumber").val()+" is already Exists";}
                 }) ;
             }
