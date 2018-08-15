@@ -2,6 +2,8 @@ package com.cars.demo.view;
 
 import com.cars.demo.model.*;
 import com.cars.demo.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,10 @@ import java.util.stream.Collectors;
 @Controller
 public class CarView {
 
+
+    private final Logger log = LoggerFactory.getLogger(general.class);
+
+
     @Autowired
     CarRepository carRepository;
     @Autowired
@@ -43,7 +49,7 @@ public class CarView {
 
     @GetMapping("/addCar")
     public String buyCar(Model model){
-
+        log.info(model.toString());
         List<Color> collectColor = colorRepository.findAll().stream().collect(Collectors.toList());
         model.addAttribute("colors",collectColor);
 
@@ -70,7 +76,10 @@ public class CarView {
 
 
     @PostMapping("/addCar")
-    public String addCar(HttpServletRequest request, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
+    public String addCar(HttpServletRequest request){
+
+        //, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes
+        log.info("Add New Car");
 
         Car car = new Car();
 
@@ -108,7 +117,7 @@ public class CarView {
             String dateOfRegistration = request.getParameter("dateOfRegistration");
             car.setMileage(mileage);
 
-            try {
+      /*      try {
                 byte[] bytes = file.getBytes();
                 car.setImage(bytes);
                 //carRepository.save(car);
@@ -118,7 +127,7 @@ public class CarView {
                 return "You failed to upload because " + " => " + e.getMessage();
             }
 
-            carRepository.save(car);
+    */        carRepository.save(car);
 
         }
         return "index";

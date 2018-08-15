@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class general {
 
 
-    private final Logger log = LoggerFactory.getLogger(Register.class);
+    private final Logger log = LoggerFactory.getLogger(general.class);
 
     @Autowired
     StateRepository stateRepository;
@@ -151,8 +151,8 @@ public class general {
 
     @GetMapping("/checkModel")
     Modell checkModel(@Valid String  modelNumber , @Valid String brandNo) {
-        System.err.println(modelNumber);
-        System.err.println(brandNo);
+
+        log.info("check if Model  is Exists  : {} of this Brand {}", modelNumber, brandNo);
 
         Optional<Modell> firstModell = modelRepository.findAll().stream()
                 .filter(e -> e.getModelNumber().equalsIgnoreCase(modelNumber))
